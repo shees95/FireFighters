@@ -43,19 +43,19 @@ ex) GameLog 개발자 : Character의 스탯 Getter좀 만들어주세요. 제가
 
 # dev 클래스
 
-## GameManager : 전용준
+- GameManager : 전용준
 
-## Character : 최석훈
-## Inventory : 최석훈
+- Character : 최석훈
+- Inventory : 최석훈
 
-## Monster : 최호용
+- Monster : 최호용
 
-## Battle : 신희성
+- Battle : 신희성
 
-## RewardSystem : 신희성
+- RewardSystem : 신희성
 
-## GameLog : 장희동
+- GameLog : 장희동
 
-## Item : 임찬우
-## ItemType : 임찬우
+- Item : 임찬우
+- ItemType : 임찬우
 
