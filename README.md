@@ -10,24 +10,24 @@
 # git 명령어
 레포지토리 다운 : git clone https://github.com/shees95/FireFighters.git
 
-브랜치 목록 확인 : git branch
-브랜치 선택 : git switch branch-name
-브랜치 추가 : git switch -c convention/branch-name
-브랜치 삭제 : git branch -d branch-name      << 웬만하면 쓰지 마세요
+브랜치 목록 확인 : git branch  
+브랜치 선택 : git switch branch-name  
+브랜치 추가 : git switch -c convention/branch-name  
+브랜치 삭제 : git branch -d branch-name      << 웬만하면 쓰지 마세요  
   
-현재 디렉토리 내 변경된 파일 전체 추가 : git add .
-파일 개별 추가 : git add dnf/Monster/Monster.cpp
-디렉토리 추가 : git add dnf/Monster/*
+현재 디렉토리 내 변경된 파일 전체 추가 : git add .  
+파일 개별 추가 : git add dnf/Monster/Monster.cpp  
+디렉토리 추가 : git add dnf/Monster/*  
   
-커밋 : git commit -m "convention : 커밋 내용"
-커밋 리셋 : git reset
+커밋 : git commit -m "convention : 커밋 내용"  
+커밋 리셋 : git reset  
   
-푸쉬 (최초 1회) : git push --set-upstream origin dev
-푸쉬  : git push
+푸쉬 (최초 1회) : git push --set-upstream origin dev  
+푸쉬  : git push  
   
-풀 : git pull
+풀 : git pull  
   
-새로고침 : git fetch (pull 이전, push 이후 항상 사용)
+새로고침 : git fetch (pull 이전, push 이후 항상 사용)  
 
 # git 전략
 1. 개발 시작 전, dev 브랜치에서 pull
