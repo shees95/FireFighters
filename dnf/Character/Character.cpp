@@ -35,16 +35,6 @@ Character* Character::Instance = nullptr;
 		return Instance;
 	}
 
-	//Getter
-	string Character::GetName() const { return Name; }
-	int Character::GetMaxHealth() const { return MaxHealth; }
-	int Character::GetHealth() const { return Health; }
-	int Character::GetPower() const { return Power; }
-
-	//Setter
-	void Character::SetHealth(int amount) { Health = amount; }
-	void 
-
 	//Attack 함수 구현
 	void Character::Attack(Monster* monster)
 	{
@@ -89,6 +79,13 @@ void Character::GainExp(int amount)
 
 void Character::LevelUp()
 {
+	//만렙설정
+	if (Level >= 10)
+	{
+		cout << "최대 레벨(10) 입니다. 더 이상 레벨업 할 수 없습니다." << endl;
+		return;
+	}
+
 	Level++; //레벨 증가
 	MaxHealth += (Level * 20); //최대 체력 증가
 	Power += (Level * 5); //공격력 증가

@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <string>
-#include <iostream>
 #include "../Interface/Actor.h"
 
 class Monster;
@@ -32,7 +30,7 @@ public:
 	
 	//Getter
 
-	std::string GetName() const;
+	std::string GetName() const { return Name; }
 	int GetLevel() const { return Level; }
 	int GetMaxHealth() const { return MaxHealth; }
 	int GetHealth() const { return Health; }
@@ -42,7 +40,7 @@ public:
 
 	//Setter
 
-	void SetHealth(int Health);
+	void SetHealth(int Health) { this->Health = Health; }
 	void SetGold(int Gold) { this->Gold = Gold; }
 	void SetLevel(int Level) { this->Level = Level; }
 	void SetPower(int Power) { this->Power = Power; }
