@@ -1,18 +1,18 @@
 ﻿#pragma once
 
-#include "Interface/Actor.h"
+#include "../Interface/Actor.h"
 
-class Player;
+class Character;
 
 class Monster : public Actor
 {
 protected:
 	string Name;
 	int Health;
-	int Attack;
+	int Power;
 
 public:
-	Monster(string Name, int Health, int Attack);
+	Monster(string Name, int Health, int Power);
 
 public:
 	//getter,Setter 생성
@@ -22,24 +22,24 @@ public:
 	int GetHealth() { return Health; }
 	void SetHealth(int Health) { this->Health = Health; }
 
-	int GetPower() { return Attack; }
-	void SetAttack(int Attack) { this->Attack = Attack; }
+	int GetPower() { return Power; }
+	void SetPower(int Power) { this->Power = Power; }
 
 
 public:
-	static Monster SpawnRandomMonster(int PlayerLevel);
+	static Monster SpawnRandomMonster(int CharacterLevel);
 
 public:
-	static Monster SpawnBossMonster(int PlayerLevel);
+	static Monster SpawnBossMonster(int CharacterLevel);
 
 public:
 	static int GetRandomValue(int Min, int Max);
 
 public:
-	void Attack(Player& Player);
+	void Attack(Character& Character);
 
 public:
-	void TakeDamage(Player& Player);
+	void TakeDamage(Character& Character);
 
 
 };
