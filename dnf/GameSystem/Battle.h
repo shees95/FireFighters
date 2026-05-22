@@ -6,12 +6,9 @@ class Character;
 
 class Battle : public Actor
 {
-    Character* Chr;
-    Monster* Mst;
-    
-    bool IsOnBattle = false;
 public:
     Battle(Character* InChr, Monster* InMst);
+    ~Battle();
     
     void SetIsOnBattle(bool InIsOnBattle) { IsOnBattle = InIsOnBattle; }
     bool GetIsOnBattle() { return IsOnBattle; }
@@ -30,4 +27,10 @@ public:
     // UI
     int Selector(int min, int max);
     
+    
+private:
+    Character* Chr;
+    Monster* Mst;
+    
+    bool IsOnBattle = false;
 };
