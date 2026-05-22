@@ -14,7 +14,7 @@ protected:
 	int Health;
 	int MaxHealth;
 	int Attack;
-	int Experience;
+	int Exp;
 	int Gold;
 
 	vector<Item> Inventory;
