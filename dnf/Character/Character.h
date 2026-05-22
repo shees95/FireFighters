@@ -1,18 +1,17 @@
 ﻿#pragma once
 #include <string>
+#include <iostream>
 #include "../Interface/Actor.h"
-
-using namespace std;
 
 class Monster;
 
 class Character : public Actor
 {
-private:
+protected:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
 
 	//멤버 변수
-	string Name;
+	std::string Name;
 	int Level;
 	int MaxHealth;
 	int Health;
@@ -20,7 +19,7 @@ private:
 	int Exp;
 	int Gold;
 
-	Character(); //생성자 (private으로 선언하여 외부에서 인스턴스 생성을 막음)
+	Character(); //외부에서 호출 못 하도록 private 생성자 선언
 
 public:
 	static Character* GetInstance(); //싱글톤 인스턴스 반환
@@ -32,22 +31,25 @@ public:
 	void LevelUp();
 	
 	//Getter
-	string GetStatus();
-	string GetName() const;
-	int GetLevel() { return Level; }
+
+	std::string GetName() const;
+	int GetLevel() const { return Level; }
 	int GetMaxHealth() const;
 	int GetHealth() const;
 	int GetPower() const;
 
+	bool IsDead() const;
+
 	//Setter
-	void SetName(const string& Name);
-	void SetLevel(int Level);
-	void SetMaxHealth(int MaxHealth);
+
 	void SetHealth(int Health);
-	void SetPower(int Power);
+	void SetGold(int Gold) { this->Gold = Gold; }
+	void SetLevel(int Level) { this->Level = Level; }
+	void SetPower(int Power) { this->Power = Power; }
+	void SetName(string Name) { this->Name = Name; }
 
 	void PlayerStatus();
-	void TakeDamage(int Damage);
+
 	virtual void Attack(Monster* monster);
 	virtual ~Character();
 

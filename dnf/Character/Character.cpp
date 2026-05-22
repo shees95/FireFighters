@@ -1,42 +1,64 @@
-﻿#include "Character.h"
-#include <iostream>
+﻿#include <iostream>
+#include <string>
+#include <algorithm>
 
 using namespace std;
+
+#include "Character.h"
+#include "../Monster/Monster.h"
 
 //싱글톤 패턴을 위한 멤버 변수 초기화
 Character* Character::Instance = nullptr;
 
 //생성자
-Character::Character()
-{
-	Name = Name;
-	Level = 1;
-	Health = 200;
-	MaxHealth = 200;
-	Power = 30;
-	Exp = 0;
-	Gold = 0;
-}
+	Character::Character()
+		: Name(Name), 
+		Level(1), 
+		MaxHealth(200), 
+		Health(200), 
+		Power(30), 
+		Exp(0), 
+		Gold(0)
+	{}
 
-//싱글톤 객체 반환
-Character* Character::GetInstance()
-{
-	//인스턴스가 아직 생성되지 않았다면 새로 생성
-	if (Instance == nullptr)
+	Character::~Character() {}
+
+	//싱글톤 객체 반환
+	Character* Character::GetInstance()
 	{
-		Instance = new Character();
+		//인스턴스가 아직 생성되지 않았다면 새로 생성
+		if (Instance == nullptr)
+		{
+			Instance = new Character();
+		}
+		//생성된 인스턴스 반환
+		return Instance;
 	}
-	//생성된 인스턴스 반환
-	return Instance;
-}
+
+	//Getter
+	string Character::GetName() const { return Name; }
+	int Character::GetMaxHealth() const { return MaxHealth; }
+	int Character::GetHealth() const { return Health; }
+	int Character::GetPower() const { return Power; }
+
+	//Setter
+	void Character::SetHealth(int amount) { Health = amount; }
+
+	//Attack 함수 구현
+	void Character::Attack(Monster* monster)
+	{
+		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
+		monster->TakeDamage(*this);
+	}
 
 //Damage를 입는 함수
 void Character::TakeDamage(int damage)
 {
-	//체력이 damage만큼 감소 (음수방지)
-	SetHealth(max(GetHealth() - damage, 0));
+	cout << Name << " 이(가) " << damage << " 데미지를 입었습니다!" << endl;
 
-	cout << GetName() << " 이(가) " << damage << " 데미지를 입었습니다!" << endl;
+	SetHealth(max(GetHealth() - damage, 0));
+	
+	cout << Name << "체력: " << GetHealth() << endl;
 }
 
 void Character::Heal(int amount)
@@ -61,6 +83,11 @@ void Character::GainExp(int amount)
 		Exp -= 100;
 		LevelUp();
 	}
+}
+
+bool Character::IsDead() const
+{
+	return Health <= 0;
 }
 
 //PlayerStatus 출력
