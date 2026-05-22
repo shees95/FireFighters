@@ -9,10 +9,10 @@ class Monster : public Actor
 protected:
 	string Name;
 	int Health;
-	int Power;
+	int Attack;
 
 public:
-	Monster(string Name, int Health, int Power);
+	Monster(string Name, int Health, int Attack);
 
 public:
 	//getter,Setter 생성
@@ -22,8 +22,8 @@ public:
 	int GetHealth() { return Health; }
 	void SetHealth(int Health) { this->Health = Health; }
 
-	int GetPower() { return Power; }
-	void SetPower(int Power) { this->Power = Power; }
+	int GetPower() { return Attack; }
+	void SetAttack(int Attack) { this->Attack = Attack; }
 
 
 public:
