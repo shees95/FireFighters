@@ -4,23 +4,43 @@
 
 using namespace std;
 
-Character GameManager::CreateCharacter(string name)
+// 생성자 - 포인터 nullptr로 초기화
+GameManager::GameManager()
+	: Player(nullptr), CurrentMonster(nullptr), CurrentBattle(nullptr)
 {
+
+}
+
+// 소멸자 - 동적 할당 해제
+GameManager::~GameManager()
+{
+	delete Player;
+	delete CurrentMonster;
+	delete CurrentBattle;
+}
+
+
+Character* GameManager::CreateCharacter(string name)
+{
+	Player = new Character();
 	// Player.SetName(name);
 	return Player;
 }
 
-Monster GameManager::SpawnMonster(int CharacterLevel)
+Monster* GameManager::SpawnMonster(int CharacterLevel)
 {
+	delete CurrentMonster; // 이전 몬스터 메모리 해제 후 새로 할당
+
 	if (CharacterLevel == 10) // 10렙이면 보스 몬스터 등장
 	{
 		cout << "이제 일반 몬스터는 상대도 안 된다!" << "\n";
-		return Monster::SpawnBossMonster(CharacterLevel);
+		CurrentMonster = new Monster(Monster::SpawnBossMonster(CharacterLevel));
 	}
 	else
 	{
-		return Monster::SpawnRandomMonster(CharacterLevel);
+		CurrentMonster = new Monster(Monster::SpawnRandomMonster(CharacterLevel));
 	}
+	return CurrentMonster;
 }
 
 //Shop GameManager::EnterShop()
@@ -71,10 +91,11 @@ void GameManager::Basecamp()
 		{
 		case 1: // 던전 입장
 		{
-			Monster monster = SpawnMonster(Player.GetLevel());
+			// SpawnMonster(Player->GetLevel());
 			// 전투 시작
-			CurrentBattle = Battle(Player, monster);
-			CurrentBattle.StartBattle();
+			delete CurrentBattle;  // 이전 전투 메모리 해제
+			CurrentBattle = new Battle(Player, CurrentMonster);
+			CurrentBattle->StartBattle();
 			break;
 		}
 		case 2: // 인벤토리 확인

@@ -12,15 +12,19 @@
 class GameManager
 {
 private:
-    Character Player;
-    Battle CurrentBattle;
+    Character* Player;
+    Monster* CurrentMonster;
+    Battle* CurrentBattle;
     GameLog GameLog;
     // Shop Shop;
 
 public:
+    GameManager();   // 생성자
+    ~GameManager();  // 소멸자 
+
     void StartGame();
-    Character CreateCharacter(std::string name);
-    Monster SpawnMonster(int CharacterLevel);
+    Character* CreateCharacter(std::string name);
+    Monster* SpawnMonster(int CharacterLevel);
     // Shop EnterShop();
     // List DisplayLog();
     void Basecamp();
