@@ -1,5 +1,7 @@
 ﻿// GameManager.cpp
 
+#include <iostream>
+
 #include "GameManager.h"
 
 using namespace std;
@@ -60,7 +62,7 @@ void GameManager::StartGame()
 	cout << "[ Text-Console RPG ]" << "\n";
 	cout << "===========================================" << "\n";
 
-	// 이름 입력 받기
+	// 이름 입력 받기 (유효성 검사 추가)
 	string name;
 	cout << "캐릭터 이름을 입력하세요. : ";
 	cin >> name;

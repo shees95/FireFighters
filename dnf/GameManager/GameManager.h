@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <iostream>
 #include <string>
+
 #include "../Character/Character.h"
 #include "../GameSystem/Battle.h"
 #include "../GameSystem/GameLog.h"
@@ -11,13 +11,6 @@
 
 class GameManager
 {
-private:
-    Character* Player;
-    Monster* CurrentMonster;
-    Battle* CurrentBattle;
-    GameLog GameLog;
-    // Shop Shop;
-
 public:
     GameManager();   // 생성자
     ~GameManager();  // 소멸자 
@@ -28,4 +21,11 @@ public:
     // Shop EnterShop();
     // List DisplayLog();
     void Basecamp();
+
+private:
+    Character* Player;
+    Monster* CurrentMonster;
+    Battle* CurrentBattle;
+    GameLog GameLog;
+    // Shop Shop;
 };
