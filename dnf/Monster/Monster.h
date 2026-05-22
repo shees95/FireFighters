@@ -1,11 +1,16 @@
 ﻿#pragma once
 
-#include "GameManager/Actor.h"
+#include "Interface/Actor.h"
 
 class Player;
 
 class Monster : public Actor
 {
+protected:
+	string Name;
+	int Health;
+	int Power;
+
 public:
 	Monster(string Name, int Health, int Power);
 
@@ -36,8 +41,5 @@ public:
 public:
 	void TakeDamage(Player& Player);
 
-protected:
-	string Name;
-	int Health;
-	int Power;
+
 };

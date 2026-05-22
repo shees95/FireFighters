@@ -22,13 +22,14 @@ void Monster::Attack(Player& Player)
 	cout << Name << "이 " << Player.GetName() << "을 공격합니다!";
 	Player.SetHealth(Player.GetHealth() - Power);
 
-	cout << Player.GetName() << " 체력 :" << Player.GetHealth() << endl;
+	cout << Player.GetName() << " 체력 : " << Player.GetHealth()+ Power << " -> " << Player.GetHealth() << "(" << Power << ")" << endl;
 }
 
 void Monster::TakeDamage(Player& Player)
 {
 	Health -= Player.GetPower();
-	cout << Player.GetName() << "가 " << Name << "을 공격합니다! " << Name << " 체력: " << Health << endl;
+	cout << Player.GetName() << "가 " << Name << "을 공격합니다! "
+		<< Name << " 체력: " << Health + Player.GetPower() << " -> " << Health << "(" << Player.GetPower() << ")" << endl;
 }
 
 
