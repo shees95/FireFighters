@@ -23,13 +23,15 @@ void Battle::StartBattle()
         if (Mst->GetHealth() <= 0)
         {
             PlayerVictory();
+            GiveReward();
+            
+            SetIsOnBattle(false);   // 전투 종료
         }
         
         MonsterTurn();
         if (Chr->GetHealth() <= 0)
         {
             MonsterVictory();
-            GiveReward();
             
             SetIsOnBattle(false);   // 전투 종료
         }
@@ -89,10 +91,12 @@ int Battle::Selector(int min, int max)
 {
     int selection = -1;
     
-    while (selection < min && selection > max)
+    while (selection < min || selection > max)
     {
         std::cout << "선택하세요 : ";
         std::cin >> selection;
         
     }
+    
+    return selection;
 }
