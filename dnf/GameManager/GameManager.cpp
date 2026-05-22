@@ -6,7 +6,7 @@ using namespace std;
 
 Character GameManager::CreateCharacter(string name)
 {
-	Player.SetName(name);
+	// Player.SetName(name);
 	return Player;
 }
 
@@ -23,15 +23,15 @@ Monster GameManager::SpawnMonster(int CharacterLevel)
 	}
 }
 
-Shop GameManager::EnterShop()
-{
+//Shop GameManager::EnterShop()
+//{
+//
+//}
 
-}
-
-List GameManager::DisplayLog()
-{
-
-}
+//List GameManager::DisplayLog()
+//{
+//
+//}
 
 void GameManager::StartGame()
 {
@@ -50,7 +50,7 @@ void GameManager::StartGame()
 	CreateCharacter(name);
 
 	// 스탯 출력
-	Player.PrintStatus();
+	// Player.PrintStatus();
 }
 
 void GameManager::Basecamp()
@@ -70,12 +70,13 @@ void GameManager::Basecamp()
 		switch (choose)
 		{
 		case 1: // 던전 입장
+		{
 			Monster monster = SpawnMonster(Player.GetLevel());
 			// 전투 시작
 			CurrentBattle = Battle(Player, monster);
 			CurrentBattle.StartBattle();
 			break;
-
+		}
 		case 2: // 인벤토리 확인
 			// 인벤토리 출력 함수 호출
 
@@ -83,6 +84,7 @@ void GameManager::Basecamp()
 
 		case 3: // 상점 입장 (도전 과제)
 
+			break;
 		case 0: // 게임 종료
 			return; // MainMenu 함수 종료
 
@@ -92,14 +94,3 @@ void GameManager::Basecamp()
 		}
 	}
 }
-
-//int main()
-//{
-//	GameManager GM;
-//
-//	GM.StartGame();
-//  
-//	GM.Basecamp();
-//
-//	return 0;
-//}
