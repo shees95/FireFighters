@@ -4,8 +4,8 @@
 #include "../Monster/Monster.h"
 #include "../Item/Item.h"
 
-Battle::Battle(Character& InChr, Monster& InMst)
-    : Chr(&InChr), Mst(&InMst)
+Battle::Battle(Character* InChr, Monster* InMst)
+    : Chr(InChr), Mst(InMst)
 {
     
 }

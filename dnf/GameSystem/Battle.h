@@ -11,7 +11,7 @@ class Battle : public Actor
     
     bool IsOnBattle = false;
 public:
-    Battle(Character& InChr, Monster& InMst);
+    Battle(Character* InChr, Monster* InMst);
     
     void SetIsOnBattle(bool InIsOnBattle) { IsOnBattle = InIsOnBattle; }
     bool GetIsOnBattle() { return IsOnBattle; }
