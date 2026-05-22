@@ -5,20 +5,6 @@ class Monster;
 
 class Character : public Actor
 {
-protected:
-	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
-
-	//멤버 변수
-	std::string Name;
-	int Level;
-	int MaxHealth;
-	int Health;
-	int Power;
-	int Exp;
-	int Gold;
-
-	Character(); //외부에서 호출 못 하도록 private 생성자 선언
-
 public:
 	static Character* GetInstance(); //싱글톤 인스턴스 반환
 
@@ -27,7 +13,7 @@ public:
 	void Heal(int amount);
 	void GainExp(int amount);
 	void LevelUp();
-	
+
 	//Getter
 
 	std::string GetName() const { return Name; }
@@ -47,8 +33,20 @@ public:
 	void SetName(string Name) { this->Name = Name; }
 
 	void PlayerStatus();
-
 	virtual void Attack(Monster* monster);
 	virtual ~Character();
+
+protected:
+	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
+	Character(); //외부에서 호출 못 하도록 private 생성자 선언
+
+	//멤버 변수
+	std::string Name;
+	int Level;
+	int MaxHealth;
+	int Health;
+	int Power;
+	int Exp;
+	int Gold;
 
 };
