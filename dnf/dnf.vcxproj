@@ -308,7 +308,6 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Item\Inventory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameManager\GameManager.cpp" />
     <ClCompile Include="GameSystem\Battle.cpp" />
@@ -324,7 +323,6 @@
     <ClInclude Include="GameSystem\GameLog.h" />
     <ClInclude Include="GameSystem\Shop.h" />
     <ClInclude Include="Interface\Actor.h" />
-    <ClInclude Include="Item\Inventory.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Monster\Monster.h" />
   </ItemGroup>
