@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 #include <cstdlib>
+//랜덤 난수용(rand) 라이브러리
 
 #include "Monster.h"
 #include "../Character/Character.h"
