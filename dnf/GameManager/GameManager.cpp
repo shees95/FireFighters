@@ -24,8 +24,10 @@ GameManager::~GameManager()
 
 Character* GameManager::CreateCharacter(string name)
 {
-	Player = new Character();
-	// Player.SetName(name);
+	// Player = new Character();      // 생성자에서 기본값 자동 세팅
+	Character* Player = Character::GetInstance();
+	Player->SetName(name);         // 이름만 따로 세팅
+	
 	return Player;
 }
 
