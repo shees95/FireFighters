@@ -27,6 +27,18 @@ enum class ItemType
 
 class Item : public Actor
 {
+
+public:
+    Item(string Name, ItemType Type, int EffectType, int EffectValue, int Price);
+
+    
+    void Use(Actor* actor);
+    void EndBattle(Actor* actor);
+    
+    string GetName() { return Name; };
+    int GetPrice() { return Price; };
+
+
 private:
     string Name;
 
@@ -38,14 +50,6 @@ private:
 
     int Price;
 
+    bool IsUsed = false;
 
-public:
-    Item(string Name, ItemType Type, int EffectType, int EffectValue, int Price);
-
-    
-    void Use(Actor* actor);
-    
-    
-    string GetName() { return Name; };
-    int GetPrice() { return Price; };
 };

@@ -1,5 +1,7 @@
 #include"Inventory.h"
+#include <algorithm>
 
+using namespace std;
 
 void Inventory::AddItem(Item item)            //inventory.addItem(hpPotion);
                                               //inventory.addItem(attackPotion);
@@ -18,11 +20,7 @@ bool Inventory::RemoveItem(Item item)
         if (items[i].GetName() == item.GetName())
         {
             items.erase(items.begin() + i);
-
-            cout << item.GetName()
-                << " 제거 완료!"
-                << endl;
-
+            cout << item.GetName() << " 제거 완료!" << endl;
             return true;
         }
     }
@@ -38,7 +36,7 @@ void Inventory::SortItemByPrice()
             return a.GetPrice() < b.GetPrice();
         });
 
-    cout << "가격순 정렬 완료!"
+    cout << "가격 오름차순 정렬 완료!"
         << endl;
 }
 
@@ -61,9 +59,10 @@ void Inventory::UseRandomItem(Actor* actor)
 
         items[randomIndex].Use(actor);
 
+        cout << items[randomIndex].GetName() << "이 인벤토리에서 사용되었습니다." << endl;;
+       
         items.erase(items.begin() + randomIndex);
 
-        cout << "아이템이 인벤토리에서 사용되었습니다."
-            << endl;
+
     }
 }
