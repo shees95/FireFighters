@@ -43,6 +43,7 @@ Character* Character::Instance = nullptr;
 
 	//Setter
 	void Character::SetHealth(int amount) { Health = amount; }
+	void 
 
 	//Attack 함수 구현
 	void Character::Attack(Monster* monster)
@@ -63,10 +64,11 @@ void Character::TakeDamage(int damage)
 
 void Character::Heal(int amount)
 {
-	//체력이 amount만큼 회복 (최대체력 초과 방지)
+	cout << GetName() << " 이(가) " << amount << " 체력을 회복했습니다!" << endl;
+
 	SetHealth(min(GetHealth() + amount, GetMaxHealth()));
 
-	cout << GetName() << " 이(가) " << amount << " 체력을 회복했습니다!" << endl;
+	cout << GetName() << "체력: " << GetHealth() << endl;
 }
 
 void Character::GainExp(int amount)
@@ -83,6 +85,18 @@ void Character::GainExp(int amount)
 		Exp -= 100;
 		LevelUp();
 	}
+}
+
+void Character::LevelUp()
+{
+	Level++; //레벨 증가
+	MaxHealth += (Level * 20); //최대 체력 증가
+	Power += (Level * 5); //공격력 증가
+	Health = MaxHealth; //체력 회복
+	cout << "축하합니다! 레벨업 하였습니다!" << endl;
+	cout << "현재 레벨: " << Level << endl;
+	cout << "최대 체력: " << MaxHealth << endl;
+	cout << "공격력: " << Power << endl;
 }
 
 bool Character::IsDead() const

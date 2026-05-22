@@ -34,9 +34,9 @@ public:
 
 	std::string GetName() const;
 	int GetLevel() const { return Level; }
-	int GetMaxHealth() const;
-	int GetHealth() const;
-	int GetPower() const;
+	int GetMaxHealth() const { return MaxHealth; }
+	int GetHealth() const { return Health; }
+	int GetPower() const { return Power; }
 
 	bool IsDead() const;
 
