@@ -26,6 +26,12 @@
   
 풀 : git pull  
 
+머지 
+- 데이터를 수신할 브랜치로 이동 : git switch receive-branch-name
+- 데이터를 발신할 브랜치로부터 머지 : git merge send-branch-name
+> send 브랜치 -> receive 브랜치
+> ※ 내 브랜치에서 가져올 브랜치를 호출하는 식.
+
 새로고침 : git fetch (pull 이전, push 이후 항상 사용)  
 
 
