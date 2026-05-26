@@ -6,6 +6,8 @@ using namespace std;
 
 #include "Character.h"
 #include "../Monster/Monster.h"
+#include "../Character/Inventory.h"
+#include "../Item/Item.h"
 
 //싱글톤 패턴을 위한 멤버 변수 초기화
 Character* Character::Instance = nullptr;
@@ -14,6 +16,7 @@ Character* Character::Instance = nullptr;
 	Character::Character()
 		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), Exp(0), Gold(0)
 	{
+
 	}
 
 //소멸자
