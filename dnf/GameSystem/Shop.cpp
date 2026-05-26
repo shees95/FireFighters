@@ -13,7 +13,7 @@ Shop::Shop()
 	Products.push_back(Item("Power 포션", ItemType::Use, 1, 10, 200));
 }
 
-void Shop::OpenShop(Character& character, Inventory& inventory)
+void Shop::OpenShop(Character& character)
 {
 	while (true)
 	{
@@ -44,13 +44,13 @@ void Shop::OpenShop(Character& character, Inventory& inventory)
 			cin >> ProductIndex;
 			cout << endl;
 
-			Buy(ProductIndex, character, inventory);
+			Buy(ProductIndex, character);
 
 			break;
 		}
 		case 2:
 		{
-			Sell(character, inventory);
+			Sell(character);
 			break;
 		}
 		case 0:
@@ -84,7 +84,7 @@ void Shop::ShowProduct()
 }
 
 
-void Shop::Buy(int ProductIndex, Character& character, Inventory& inventory)
+void Shop::Buy(int ProductIndex, Character& character)
 {
 	int Index = ProductIndex - 1;
 
@@ -114,13 +114,15 @@ void Shop::Buy(int ProductIndex, Character& character, Inventory& inventory)
 	character.SetGold(character.GetGold() - item.GetPrice());
 
 	//아이템 지급
-	inventory.AddItem(item);
+	character.GetInventory().AddItem(item);
 
 	cout << "남은 골드 : " << character.GetGold() << "G" << endl;
 }
 
-void Shop::Sell(Character& character, Inventory& inventory)
+void Shop::Sell(Character& character)
 {
+	Inventory& inventory = character.GetInventory();
+
 	while (true)
 	{
 		cout << endl
