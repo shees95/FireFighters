@@ -1,6 +1,4 @@
 ﻿#include <iostream>
-#include <vector>
-#include <string>
 
 using namespace std;
 
@@ -14,6 +12,7 @@ Shop::Shop()
 	Products.push_back(Item("HP 포션", ItemType::Use, 0, 50, 100));
 	Products.push_back(Item("Power 포션", ItemType::Use, 1, 10, 200));
 }
+
 void Shop::OpenShop(Character& character, Inventory& inventory)
 {
 	while (true)
@@ -77,10 +76,11 @@ void Shop::ShowProduct()
 		<< " 판매 상품 리스트" << endl
 		<< "------------------" << endl;
 
-	for (int i = 0; i < Products.size(); i++)
+	for (size_t i = 0; i < Products.size(); i++)
 	{
 		cout << i + 1 << "." << Products[i].GetName() << " - 가격 : " << Products[i].GetPrice() << "골드" << endl;
 	}
+	cout << "0. 나가기" << endl;
 }
 
 
@@ -88,7 +88,14 @@ void Shop::Buy(int ProductIndex, Character& character, Inventory& inventory)
 {
 	int Index = ProductIndex - 1;
 
-	if (Index < 0 || Index >= Products.size())
+	//0. 나가기 구현
+	if (ProductIndex == 0)
+	{
+		return;
+	}
+
+	// 번호 잘못 입력했을 때 처리
+	if (Index < 0 || Index >= static_cast<int>(Products.size()))
 	{
 		cout << "잘못된 상품 번호입니다." << endl;
 		return;
@@ -114,5 +121,62 @@ void Shop::Buy(int ProductIndex, Character& character, Inventory& inventory)
 
 void Shop::Sell(Character& character, Inventory& inventory)
 {
-	cout << "아직 개발중인 기능입니다." << endl;
+	while (true)
+	{
+		cout << endl
+			 << "------------------" << endl
+			 << " 판매 메뉴 " << endl
+			 << "------------------" << endl;
+
+		// 인벤토리 출력
+		inventory.PrintInventory();
+		cout << "0. 나가기" << endl;
+
+		// 인벤토리가 비어있으면 종료
+		if (inventory.GetInventorySize() == 0)
+		{
+			cout << "보유한 아이템이 없습니다." << endl;
+			return;
+		}
+
+		// 판매 아이템 선택
+		int SellIndex;
+		cout << endl
+			<< "판매할 아이템 번호 입력"
+			<< endl
+			<< "선택 : ";
+
+		cin >> SellIndex;
+		int Index = SellIndex - 1;
+
+		//0.나가기 구현
+		if (SellIndex == 0)
+		{
+			return;
+		}
+
+		//번호 잘못 입력했을 때 처리
+		if (Index < 0 || Index >= static_cast<int>(inventory.GetInventorySize()))
+		{
+			cout << "잘못된 번호입니다." << endl;
+			continue;
+		}
+
+		// 아이템 가져오기
+		Item item = inventory.GetItem(Index);
+
+		// 판매 가격
+		int SellPrice = item.GetPrice() * 60 / 100;
+
+		// 골드 지급
+		character.SetGold(character.GetGold() + SellPrice);
+
+		// 인벤토리 제거
+		inventory.RemoveItem(item);
+
+		cout << endl
+		     << item.GetName() << " 판매 완료!" << endl;
+
+		cout << SellPrice << " 골드 획득!" << " (현재 골드 : " << character.GetGold() << "G)" << endl;
+	}
 }
