@@ -155,7 +155,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character\Character.cpp" />
-    <ClCompile Include="Character\Inventory.cpp" />
     <ClCompile Include="GameSystem\GameLog.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -308,6 +307,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Item\Inventory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameManager\GameManager.cpp" />
     <ClCompile Include="GameSystem\Battle.cpp" />
@@ -317,12 +317,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.h" />
-    <ClInclude Include="Character\Inventory.h" />
     <ClInclude Include="GameManager\GameManager.h" />
     <ClInclude Include="GameSystem\Battle.h" />
     <ClInclude Include="GameSystem\GameLog.h" />
     <ClInclude Include="GameSystem\Shop.h" />
     <ClInclude Include="Interface\Actor.h" />
+    <ClInclude Include="Item\Inventory.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Monster\Monster.h" />
   </ItemGroup>
