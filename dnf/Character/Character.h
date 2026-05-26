@@ -52,7 +52,7 @@ public:
 	int GetInventorySize() const; //인벤토리 크기 반환 함수
 	int GetInventoryItemCount() const; //인벤토리에 있는 아이템 개수 반환 함수
 
-	Inventory& GetInventory() { return Inven; } //인벤토리 포인터 반환
+	Inventory& GetInventory() { return Inven; } //인벤토리 객체 반환 함수
 
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
@@ -68,5 +68,5 @@ private:
 	int TmpPower; //일시적으로 증가한 공격력을 저장하는 변수
 	int Exp;
 	int Gold;
-	Inventory Inven; //인벤토리 포인터
+	Inventory Inven; //인벤토리 객체
 };
