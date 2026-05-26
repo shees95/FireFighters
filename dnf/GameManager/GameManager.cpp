@@ -72,7 +72,7 @@ void GameManager::StartGame()
 	CreateCharacter(name);
 
 	// 스탯 출력
-	Player->PrintStatus();
+	Player->PlayerStatus();
 }
 
 void GameManager::MainLoop()
