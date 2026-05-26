@@ -16,15 +16,12 @@ GameManager::GameManager()
 // 소멸자 - 동적 할당 해제
 GameManager::~GameManager()
 {
-	delete Player;
 	delete CurrentMonster;
 	delete CurrentBattle;
 }
 
-
 Character* GameManager::CreateCharacter(string name)
 {
-	// Player = new Character();      // 생성자에서 기본값 자동 세팅
 	Player = Character::GetInstance(); // 싱글톤 패턴으로 멤버 변수 초기화
 	Player->SetName(name);         // 이름만 따로 세팅
 	
@@ -74,7 +71,7 @@ void GameManager::StartGame()
 	CreateCharacter(name);
 
 	// 스탯 출력
-	// Player.PrintStatus();
+	Player->PrintStatus();
 }
 
 void GameManager::Basecamp()
@@ -96,7 +93,7 @@ void GameManager::Basecamp()
 		case 1: // 던전 입장
 		{
 			// 전투 시작
-			SpawnMonster(Player->GetLevel());
+			CurrentMonster = SpawnMonster(Player->GetLevel());
 
 			delete CurrentBattle;  // 이전 전투 메모리 해제
 			CurrentBattle = new Battle(Player, CurrentMonster);
