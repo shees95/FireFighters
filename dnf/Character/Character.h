@@ -21,13 +21,15 @@ public:
 	void TakeDamage(int damage);
 	void PlayerStatus(); //상태 출력 함수
 	bool IsDead() const; //상대 확인 함수
+	void UseItem(Item* item); //아이템 사용 함수
+
 
 	~Character(); //소멸자
 
 public:
 	//Getter, Setter 생성
-	string GetName() const { return Name; }
-	void SetName(string Name) { this->Name = Name; }
+	std::string GetName() const { return Name; }
+	void SetName(std::string Name) { this->Name = Name; }
 
 	int GetHealth() const { return Health; }
 	void SetHealth(int Health) { this->Health = Health; }
@@ -46,13 +48,15 @@ public:
 
 	int GetMaxHealth() const { return MaxHealth; }
 
+	Inventory* GetInventory() const { return Inventory; } //인벤토리 포인터 반환
+
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
 
 	Character(); //외부에서 호출 못 하도록 private 생성자 선언
 
 	//멤버 변수
-	string Name;
+	std::string Name;
 	int Level;
 	int MaxHealth;
 	int Health;
@@ -60,5 +64,5 @@ private:
 	int tmpPower; //일시적으로 증가한 공격력을 저장하는 변수
 	int Exp;
 	int Gold;
-
+	Inventory* Inventory; //인벤토리 포인터
 };
