@@ -16,7 +16,7 @@ public:
 
 	//Getter
 
-	std::string GetName() const { return Name; }
+	string GetName() const { return Name; }
 	int GetLevel() const { return Level; }
 	int GetMaxHealth() const { return MaxHealth; }
 	int GetHealth() const { return Health; }
@@ -36,12 +36,12 @@ public:
 	virtual void Attack(Monster* monster);
 	virtual ~Character();
 
-protected:
+private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
 	Character(); //외부에서 호출 못 하도록 private 생성자 선언
 
 	//멤버 변수
-	std::string Name;
+	string Name;
 	int Level;
 	int MaxHealth;
 	int Health;

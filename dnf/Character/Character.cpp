@@ -12,7 +12,7 @@ Character* Character::Instance = nullptr;
 
 //생성자
 	Character::Character()
-		: Name(Name), 
+		: Name(),
 		Level(1), 
 		MaxHealth(200), 
 		Health(200), 
@@ -68,32 +68,34 @@ void Character::GainExp(int amount)
 
 	cout << amount << " 만큼 경험치를 획득하였습니다!" << endl;
 
-	// 경험치가 100 이상인 동안 반복
-	while (Exp >= 100)
+	// 레벨업 조건을 만족하는 동안 레벨업 반복
+	while (Level < 10 && Exp >= 100)
 	{
 		// 레벨업에 사용한 경험치 차감
 		Exp -= 100;
+
+		// 레벨업
 		LevelUp();
 	}
 }
 
 void Character::LevelUp()
 {
-	//만렙설정
-	if (Level >= 10)
-	{
-		cout << "최대 레벨(10) 입니다. 더 이상 레벨업 할 수 없습니다." << endl;
-		return;
-	}
+		Level++; //레벨 증가
+		MaxHealth += (Level * 20); //최대 체력 증가
+		Power += (Level * 5); //공격력 증가
+		Health = MaxHealth; //체력 회복
 
-	Level++; //레벨 증가
-	MaxHealth += (Level * 20); //최대 체력 증가
-	Power += (Level * 5); //공격력 증가
-	Health = MaxHealth; //체력 회복
-	cout << "축하합니다! 레벨업 하였습니다!" << endl;
-	cout << "현재 레벨: " << Level << endl;
-	cout << "최대 체력: " << MaxHealth << endl;
-	cout << "공격력: " << Power << endl;
+		cout << "축하합니다! 레벨업 하였습니다!" << endl;
+		cout << "현재 레벨: " << Level << endl;
+		cout << "최대 체력: " << MaxHealth << endl;
+		cout << "공격력: " << Power << endl;
+
+	if (Level == 10)
+	{
+		cout << "\n최대 레벨(10)에 도달했습니다." << endl;
+		cout << "(이후 획득하는 경험치는 계속 누적 됩니다.)" << endl;
+	}
 }
 
 bool Character::IsDead() const
@@ -101,13 +103,12 @@ bool Character::IsDead() const
 	return Health <= 0;
 }
 
-//PlayerStatus 출력
+//Lv.1 John (exp 25/100)
+// HP: 100 / 100   Power : 25
+// Gold: 00G
 void Character::PlayerStatus()
 {
-	cout << "Name: " << Name << endl;
-	cout << "Level: " << Level << endl;
-	cout << "Exp: " << Exp << endl;
-	cout << "HP: " << Health << endl;
-	cout << "Power: " << Power << endl;
-	cout << "Gold: " << Gold << endl;
+	cout << "Lv." << Level << " " << Name << " (exp " << Exp << "/100)" << endl;
+	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << Power << endl;
+	cout << "Gold: " << Gold << "G" << endl;
 }
