@@ -79,7 +79,7 @@ void GameLog::LogPlayerDamaged(string MonsterName, int Damage)
 
 
 // 아이템 사용 기록 및 카운트 누적
-void GameLog::LogItemUse(const Item& ItemRef)
+void GameLog::LogItemUse(Item& ItemRef) //const 삭제했습니다!
 {
     string name = ItemRef.GetName(); // 클래스 함수명 아직 안맞음
     ItemUseCount[name]++; // 각 아이템 사용 횟수 누적
