@@ -32,6 +32,7 @@ void Battle::StartBattle()
             GiveReward();
             
             SetIsOnBattle(false);   // 전투 종료
+            break;
         }
         
         MonsterTurn();
@@ -40,6 +41,7 @@ void Battle::StartBattle()
             MonsterVictory();
             
             SetIsOnBattle(false);   // 전투 종료
+            break;
         }
         
     }
