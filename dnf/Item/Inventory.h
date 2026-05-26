@@ -21,6 +21,8 @@ public:
 
     void PrintInventory();
 
+    std::size_t GetInventorySize() const { return items.size(); };
+
 private:
     std::vector<Item> items;
 
