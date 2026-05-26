@@ -4,6 +4,8 @@
 
 #include "GameManager.h"
 
+GameLog GameManager::GameManagerLog;
+
 using namespace std;
 
 // 생성자 - 포인터 nullptr로 초기화
@@ -31,8 +33,6 @@ Character* GameManager::CreateCharacter(string name)
 
 Monster* GameManager::SpawnMonster(int CharacterLevel)
 {
-	delete CurrentMonster; // 이전 몬스터 메모리 해제 후 새로 할당
-
 	if (CharacterLevel == 10) // 10렙이면 보스 몬스터 등장
 	{
 		cout << "이제 일반 몬스터는 상대도 안 된다!" << "\n";
@@ -93,26 +93,32 @@ void GameManager::MainLoop()
 		{
 		case 1: // 던전 입장
 		{
+			GameManagerLog.LogSceneChange("던전");
 			// 전투 시작
-			CurrentMonster = SpawnMonster(Player->GetLevel());
+			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
+			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
 
-			delete CurrentBattle;  // 이전 전투 메모리 해제
+			CurrentMonster = SpawnMonster(Player->GetLevel());
+			GameManagerLog.LogMonsterSpawn(*CurrentMonster);
 			CurrentBattle = new Battle(Player, CurrentMonster);
 			CurrentBattle->StartBattle();
 			break;
 		}
 		case 2: // 인벤토리 확인
+			GameManagerLog.LogSceneChange("인벤토리");
 			// 인벤토리 아이템 출력 함수 호출
-			Player->DisplayItems();
+			// Player->DisplayItems();
 
 			break;
 
 		case 3: // 상점 입장 (도전 과제)
+			GameManagerLog.LogSceneChange("상점");
 
 			break;
 
 		case 0: // 게임 종료
-
+			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
+			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
 			return; // MainLoop 함수 종료
 
 		default:
