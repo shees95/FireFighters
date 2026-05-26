@@ -22,6 +22,6 @@ public:
     void PrintInventory();
 
 private:
-    vector<Item> items;
+    std::vector<Item> items;
 
 };
