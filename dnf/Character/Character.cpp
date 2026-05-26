@@ -6,7 +6,7 @@ using namespace std;
 
 #include "Character.h"
 #include "../Monster/Monster.h"
-#include "../Character/Inventory.h"
+#include "../Item/Inventory.h"
 #include "../Item/Item.h"
 
 //싱글톤 패턴을 위한 멤버 변수 초기화
@@ -15,12 +15,11 @@ Character* Character::Instance = nullptr;
 //생성자
 	Character::Character()
 		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), TmpPower(0), Exp(0), Gold(0)
-	{
-
-	}
+	{}
 
 //소멸자
-	Character::~Character() {}
+	Character::~Character() 
+	{}
 
 	//싱글톤 객체 반환
 	Character* Character::GetInstance()
@@ -117,4 +116,14 @@ void Character::PlayerStatus()
 	cout << "Lv." << Level << " " << Name << " (exp " << Exp << "/100)" << endl;
 	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << Power << endl;
 	cout << "Gold: " << Gold << "G" << endl;
+}
+
+void Character::AddItem(Item item)
+{
+	Inven.AddItem(item);
+}
+
+void Character::DisplayItems()
+{
+	Inven.PrintInventory();
 }
