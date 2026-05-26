@@ -22,7 +22,7 @@ public:
 	void PlayerStatus(); //상태 출력 함수
 	bool IsDead() const; //상대 확인 함수
 	void AddItem(Item item);
-	void UseRandomitem();
+	void UseRandomItem();
 	void DisplayItems();
 	void ResetTmpPower(); //전투 종료 후 일시적으로 증가한 공격력 초기화 함수
 
