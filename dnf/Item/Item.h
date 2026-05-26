@@ -31,7 +31,7 @@ public:
     void Use(Actor* actor);
     
     std::string GetName() { return Name; };
-    int GetPrice() { return Price; };
+    int GetPrice()const { return Price; };
 
 
 private:
