@@ -3,6 +3,8 @@
 #include <string>
 
 class Monster;
+class Inventory;
+class Item;
 
 class Character : public Actor
 {
@@ -11,11 +13,16 @@ public:
 	static Character* GetInstance(); //싱글톤 인스턴스 반환
 	static void DestroyInstance(); //싱글톤 인스턴스 소멸
 
+	~Character(); //소멸자
+
 	//멤버 함수
-	void TakeDamage(int damage);
 	void Heal(int amount);
 	void GainExp(int amount);
 	void LevelUp();
+	void Attack(Monster* monster); //공격함수
+	void TakeDamage(int damage);
+	void PlayerStatus(); //캐릭터 상태 출력 함수
+	bool IsDead() const; //상태 확인 함수
 
 public:
 	//Getter, Setter 생성
@@ -38,16 +45,6 @@ public:
 	void SetGold(int Gold) { this->Gold = Gold; }
 
 	int GetMaxHealth() const { return MaxHealth; }
-
-	//상태 확인 함수
-	bool IsDead() const;
-
-public: //상태 출력 함수
-	void PlayerStatus();
-
-public: //공격 함수
-	void Attack(Monster* monster);
-	void TakeDamage(int damage);
 
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수

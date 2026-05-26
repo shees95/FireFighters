@@ -52,7 +52,7 @@ void Character::TakeDamage(int damage)
 
 	SetHealth(max(GetHealth() - damage, 0));
 	
-	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth << endl;
+	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
 }
 
 void Character::Heal(int amount)
