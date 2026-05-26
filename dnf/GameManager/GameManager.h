@@ -26,6 +26,5 @@ private:
     Character* Player;
     Monster* CurrentMonster;
     Battle* CurrentBattle;
-    static GameLog GameManagerLog;
     // Shop Shop;
 };
