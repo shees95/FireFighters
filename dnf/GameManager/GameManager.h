@@ -20,7 +20,7 @@ public:
     Monster* SpawnMonster(int CharacterLevel);
     // Shop EnterShop();
     // List DisplayLog();
-    void Basecamp();
+    void MainLoop();
 
 private:
     Character* Player;
