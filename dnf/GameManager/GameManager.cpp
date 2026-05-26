@@ -75,7 +75,7 @@ void GameManager::StartGame()
 	Player->PrintStatus();
 }
 
-void GameManager::Basecamp()
+void GameManager::MainLoop()
 {
 	while (true)
 	{
@@ -112,7 +112,7 @@ void GameManager::Basecamp()
 
 		case 0: // 게임 종료
 
-			return; // MainMenu 함수 종료
+			return; // MainLoop 함수 종료
 
 		default:
 			cout << "유효하지 않은 입력입니다. 올바른 번호를 입력하세요.";

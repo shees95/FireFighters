@@ -8,7 +8,7 @@ int main(void)
 
 	GM.StartGame();
 
-	GM.Basecamp();
+	GM.MainLoop();
 
 	Character::DestroyInstance(); // Character 클래스에서 생성한 객체 메모리에서 해제
 
