@@ -39,10 +39,10 @@ Character* Character::Instance = nullptr;
 	}
 
 	//Attack 함수 구현
-	void Character::Attack(Monster& monster)
+	void Character::Attack(Monster* monster)
 	{
-		cout << Name << "이(가) " << monster.GetName() << "을 공격합니다!" << endl;
-		monster.TakeDamage(*this);
+		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
+		monster->TakeDamage(*this);
 	}
 
 //Damage를 입는 함수

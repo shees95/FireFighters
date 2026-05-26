@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Interface/Actor.h"
+#include <string>
 
 class Monster;
 
@@ -45,9 +46,8 @@ public: //상태 출력 함수
 	void PlayerStatus();
 
 public: //공격 함수
-	virtual void Attack(Monster& monster);
+	void Attack(Monster* monster);
 	void TakeDamage(int damage);
-	virtual ~Character();
 
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
