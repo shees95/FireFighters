@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "../Interface/Actor.h"
+#include "../Item/Item.h"
 
 class Character;
 
@@ -10,9 +11,12 @@ protected:
 	string Name;
 	int Health;
 	int Power;
+	
+private:
+	Item DropItem;
 
 public:
-	Monster(string Name, int Health, int Power);
+	Monster(string Name, int Health, int Power, Item DropItem);
 
 public:
 	//getter,Setter 생성
@@ -25,6 +29,7 @@ public:
 	int GetPower() { return Power; }
 	void SetPower(int Power) { this->Power = Power; }
 
+	Item GetDropItem() { return DropItem; }
 
 public:
 	static Monster SpawnRandomMonster(int CharacterLevel);
