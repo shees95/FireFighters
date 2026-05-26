@@ -1,34 +1,30 @@
 ﻿#pragma once
 #include "../Interface/Actor.h"
+#include "../Item/Item.h"
+#include "../Character/Character.h"
 
 #include <vector>
 #include <string>
 using namespace std;
 
-
+class character;
 class Inventory;
-
-struct Product
-{
-    string Name;
-    int Price;
-};
 
 class Shop
 {
 private:
-    vector<Product> Products;
+    vector<Item> Products;
 
 public:
     Shop();
 
 public:
-    void OpenShop(Inventory& Inventory);
+    void OpenShop(Character& character, Inventory& inventory);
 
     void ShowProduct();
 
-    void Buy(int ProductIndex, Inventory& Inventory);
-    void Sell();
+    void Buy(int ProductIndex, Character& character, Inventory& inventory);
+    void Sell(Character& character, Inventory& inventory);
 
 
 
