@@ -19,7 +19,7 @@ public:
 
     void UseRandomItem(Actor* actor);
 
-
+    void PrintInventory();
 
 private:
     vector<Item> items;

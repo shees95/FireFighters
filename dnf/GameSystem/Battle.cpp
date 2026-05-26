@@ -10,6 +10,12 @@ Battle::Battle(Character* InChr, Monster* InMst)
     
 }
 
+Battle::~Battle()
+{
+    delete Chr; 
+    delete Mst;
+}
+
 void Battle::StartBattle()
 {
     // 전투 시작
@@ -26,6 +32,7 @@ void Battle::StartBattle()
             GiveReward();
             
             SetIsOnBattle(false);   // 전투 종료
+            break;
         }
         
         MonsterTurn();
@@ -34,6 +41,7 @@ void Battle::StartBattle()
             MonsterVictory();
             
             SetIsOnBattle(false);   // 전투 종료
+            break;
         }
         
     }
@@ -46,19 +54,19 @@ void Battle::PlayerTurn()
     switch (Selector(0, 3))
     {
     case 0:
-        // Chr->Attack();
+        MonsterVictory();
         break;
         
     case 1:
-        
+        Chr->Attack(Mst);
         break;
         
     case 2:
-        
+        std::cout << "방어는 구현 안했지롱\n턴은 넘어갔다!\n" << std::endl;
         break;
         
     case 3:
-        MonsterVictory();
+        
         break;
         
     default:
@@ -84,7 +92,7 @@ void Battle::MonsterVictory()
 
 void Battle::GiveReward()
 {
-    
+    Chr->GetInventory()->AddItem(Mst->GetDropItem());
 }
 
 int Battle::Selector(int min, int max)
