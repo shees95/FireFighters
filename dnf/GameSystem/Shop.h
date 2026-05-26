@@ -4,7 +4,6 @@
 #include <vector>
 
 class Character;
-class Inventory;
 
 class Shop
 {
@@ -15,10 +14,10 @@ public:
     Shop();
 
 public:
-    void OpenShop(Character& character, Inventory& inventory);
+    void OpenShop(Character& character);
     void ShowProduct();
 
 public:
-    void Buy(int ProductIndex, Character& character, Inventory& inventory);
-    void Sell(Character& character, Inventory& inventory);
+    void Buy(int ProductIndex, Character& character);
+    void Sell(Character& character);
 };
