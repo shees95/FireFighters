@@ -6,6 +6,7 @@ class Monster;
 class Character : public Actor
 {
 public:
+	// 싱글톤 관리 함수
 	static Character* GetInstance(); //싱글톤 인스턴스 반환
 	static void DestroyInstance(); //싱글톤 인스턴스 소멸
 
@@ -15,26 +16,37 @@ public:
 	void GainExp(int amount);
 	void LevelUp();
 
-	//Getter
-
+public:
+	//Getter, Setter 생성
 	string GetName() const { return Name; }
-	int GetLevel() const { return Level; }
-	int GetMaxHealth() const { return MaxHealth; }
-	int GetHealth() const { return Health; }
-	int GetPower() const { return Power; }
-
-	bool IsDead() const;
-
-	//Setter
-
-	void SetHealth(int Health) { this->Health = Health; }
-	void SetGold(int Gold) { this->Gold = Gold; }
-	void SetLevel(int Level) { this->Level = Level; }
-	void SetPower(int Power) { this->Power = Power; }
 	void SetName(string Name) { this->Name = Name; }
 
+	int GetHealth() const { return Health; }
+	void SetHealth(int Health) { this->Health = Health; }
+
+	int GetPower() const { return Power; }
+	void SetPower(int Power) { this->Power = Power; }
+
+	int GetLevel() const { return Level; }
+	void SetLevel(int Level) { this->Level = Level; }
+
+	int GetExp() const { return Exp; }
+	void SetExp(int Exp) { this->Exp = Exp; }
+
+	int GetGold() const { return Gold; }
+	void SetGold(int Gold) { this->Gold = Gold; }
+
+	int GetMaxHealth() const { return MaxHealth; }
+
+	//상태 확인 함수
+	bool IsDead() const;
+
+public: //상태 출력 함수
 	void PlayerStatus();
-	virtual void Attack(Monster* monster);
+
+public: //공격 함수
+	virtual void Attack(Monster& monster);
+	void TakeDamage(int damage);
 	virtual ~Character();
 
 private:
@@ -48,6 +60,7 @@ private:
 	int MaxHealth;
 	int Health;
 	int Power;
+	int tmpPower; //일시적으로 증가한 공격력을 저장하는 변수
 	int Exp;
 	int Gold;
 

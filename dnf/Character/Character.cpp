@@ -12,15 +12,11 @@ Character* Character::Instance = nullptr;
 
 //생성자
 	Character::Character()
-		: Name(),
-		Level(1), 
-		MaxHealth(200), 
-		Health(200), 
-		Power(30), 
-		Exp(0), 
-		Gold(0)
-	{}
+		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), Exp(0), Gold(0)
+	{
+	}
 
+//소멸자
 	Character::~Character() {}
 
 	//싱글톤 객체 반환
@@ -43,10 +39,10 @@ Character* Character::Instance = nullptr;
 	}
 
 	//Attack 함수 구현
-	void Character::Attack(Monster* monster)
+	void Character::Attack(Monster& monster)
 	{
-		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
-		monster->TakeDamage(*this);
+		cout << Name << "이(가) " << monster.GetName() << "을 공격합니다!" << endl;
+		monster.TakeDamage(*this);
 	}
 
 //Damage를 입는 함수
@@ -56,7 +52,7 @@ void Character::TakeDamage(int damage)
 
 	SetHealth(max(GetHealth() - damage, 0));
 	
-	cout << Name << "체력: " << GetHealth() << endl;
+	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth << endl;
 }
 
 void Character::Heal(int amount)
