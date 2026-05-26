@@ -16,6 +16,7 @@ GameManager::GameManager()
 // 소멸자 - 동적 할당 해제
 GameManager::~GameManager()
 {
+	Player = nullptr;
 	delete CurrentMonster;
 	delete CurrentBattle;
 }
