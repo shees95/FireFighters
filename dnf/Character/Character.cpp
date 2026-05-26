@@ -35,6 +35,7 @@ Character* Character::Instance = nullptr;
 		return Instance;
 	}
 
+	//싱글톤 객체 소멸
 	void Character::DestroyInstance()
 	{
 		delete Instance;
