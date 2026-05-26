@@ -22,6 +22,7 @@ public:
     // List DisplayLog();
     void MainLoop();
 
+    static GameLog GameLog;
 private:
     Character* Player;
     Monster* CurrentMonster;
