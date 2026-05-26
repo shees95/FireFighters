@@ -4,6 +4,8 @@
 
 #include "GameManager.h"
 
+GameLog GameManager::GameLog;
+
 using namespace std;
 
 // 생성자 - 포인터 nullptr로 초기화
@@ -91,26 +93,26 @@ void GameManager::MainLoop()
 		{
 		case 1: // 던전 입장
 		{
-			// GameManagerLog.LogSceneChange("던전");
+			GameManager::GameLog.LogSceneChange("던전");
 			// 전투 시작
 			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
 			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
 
 			CurrentMonster = SpawnMonster(Player->GetLevel());
-			// GameManagerLog.LogMonsterSpawn(*CurrentMonster);
+			GameManager::GameLog.LogMonsterSpawn(*CurrentMonster);
 			CurrentBattle = new Battle(Player, CurrentMonster);
 			CurrentBattle->StartBattle();
 			break;
 		}
 		case 2: // 인벤토리 확인
-			// GameManagerLog.LogSceneChange("인벤토리");
+			GameManager::GameLog.LogSceneChange("인벤토리");
 			// 인벤토리 아이템 출력 함수 호출
 			// Player->DisplayItems();
 
 			break;
 
 		case 3: // 상점 입장 (도전 과제)
-			// GameManagerLog.LogSceneChange("상점");
+			GameManager::GameLog.LogSceneChange("상점");
 
 			break;
 
