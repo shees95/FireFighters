@@ -102,7 +102,8 @@ void GameManager::MainLoop()
 			break;
 		}
 		case 2: // 인벤토리 확인
-			// 인벤토리 출력 함수 호출
+			// 인벤토리 아이템 출력 함수 호출
+			Player->DisplayItems();
 
 			break;
 
