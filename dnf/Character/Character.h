@@ -24,6 +24,7 @@ public:
 	void AddItem(Item item);
 	void UseRandomitem();
 	void DisplayItems();
+	void ResetTmpPower(); //전투 종료 후 일시적으로 증가한 공격력 초기화 함수
 
 	~Character(); //소멸자
 
@@ -38,6 +39,11 @@ public:
 	int GetPower() const { return Power; }
 	void SetPower(int Power) { this->Power = Power; }
 
+	int GetTempPower() const { return TmpPower; }
+	void SetTempPower(int TmpPower) { this->TmpPower = TmpPower; }
+
+	int GetTotalPower() { return Power + TmpPower; } //현재 공격력 반환 함수
+
 	int GetLevel() const { return Level; }
 	void SetLevel(int Level) { this->Level = Level; }
 
@@ -48,9 +54,6 @@ public:
 	void SetGold(int Gold) { this->Gold = Gold; }
 
 	int GetMaxHealth() const { return MaxHealth; }
-
-	int GetInventorySize() const; //인벤토리 크기 반환 함수
-	int GetInventoryItemCount() const; //인벤토리에 있는 아이템 개수 반환 함수
 
 	Inventory& GetInventory() { return Inven; } //인벤토리 객체 반환 함수
 
