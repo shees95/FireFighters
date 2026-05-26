@@ -130,7 +130,7 @@ void Character::DisplayItems()
 	Inven.PrintInventory();
 }
 
-void Character::UseRandomitem()
+void Character::UseRandomItem()
 {
 	Inven.UseRandomItem(this);
 }
