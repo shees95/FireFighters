@@ -1,23 +1,30 @@
 ﻿#pragma once
-
 #include "../Interface/Actor.h"
+#include "../Item/Item.h"
+
+#include <string>
+
+
 
 class Character;
 
 class Monster : public Actor
 {
 protected:
-	string Name;
+	std::string Name;
 	int Health;
 	int Power;
+	
+private:
+	Item DropItem;
 
 public:
-	Monster(string Name, int Health, int Power);
+	Monster(std::string Name, int Health, int Power, Item DropItem);
 
 public:
 	//getter,Setter 생성
-	string GetName() { return Name; }
-	void SetName(string Name) { this->Name = Name; }
+	std::string GetName() { return Name; }
+	void SetName(std::string Name) { this->Name = Name; }
 
 	int GetHealth() { return Health; }
 	void SetHealth(int Health) { this->Health = Health; }
@@ -25,11 +32,10 @@ public:
 	int GetPower() { return Power; }
 	void SetPower(int Power) { this->Power = Power; }
 
+	Item GetDropItem() { return DropItem; }
 
 public:
 	static Monster SpawnRandomMonster(int CharacterLevel);
-
-public:
 	static Monster SpawnBossMonster(int CharacterLevel);
 
 public:
@@ -37,9 +43,7 @@ public:
 
 public:
 	void Attack(Character& Character);
-
-public:
-	void TakeDamage(Character& Character);
+	void TakeDamage(int Damage);
 
 
 };
