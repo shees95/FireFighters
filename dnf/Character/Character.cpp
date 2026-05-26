@@ -35,6 +35,12 @@ Character* Character::Instance = nullptr;
 		return Instance;
 	}
 
+	void Character::DestroyInstance()
+	{
+		delete Instance;
+		Instance = nullptr;
+	}
+
 	//Attack 함수 구현
 	void Character::Attack(Monster* monster)
 	{

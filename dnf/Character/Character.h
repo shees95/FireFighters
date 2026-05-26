@@ -7,6 +7,7 @@ class Character : public Actor
 {
 public:
 	static Character* GetInstance(); //싱글톤 인스턴스 반환
+	static void DestroyInstance(); //싱글톤 인스턴스 소멸
 
 	//멤버 함수
 	void TakeDamage(int damage);
@@ -38,6 +39,7 @@ public:
 
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
+
 	Character(); //외부에서 호출 못 하도록 private 생성자 선언
 
 	//멤버 변수
