@@ -45,7 +45,7 @@ Character* Character::Instance = nullptr;
 	void Character::Attack(Monster* monster)
 	{
 		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
-		monster->TakeDamage(*this);
+		monster->TakeDamage(Power);
 	}
 
 //Damage를 입는 함수
