@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -44,7 +46,7 @@ Character* Character::Instance = nullptr;
 	void Character::Attack(Monster* monster)
 	{
 		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
-		monster->TakeDamage(Power);
+		monster->TakeDamage(GetTotalPower());
 	}
 
 //Damage를 입는 함수
@@ -126,4 +128,19 @@ void Character::AddItem(Item item)
 void Character::DisplayItems()
 {
 	Inven.PrintInventory();
+}
+
+void Character::UseRandomItem()
+{
+	Inven.UseRandomItem(this);
+}
+
+void Character::ResetTmpPower()
+{
+	if (TmpPower > 0)
+	{
+		cout << "일시적으로 증가한 공격력이 초기화됩니다." << endl;
+		TmpPower = 0;
+	}
+	
 }
