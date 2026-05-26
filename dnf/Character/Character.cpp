@@ -14,7 +14,7 @@ Character* Character::Instance = nullptr;
 
 //생성자
 	Character::Character()
-		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), Exp(0), Gold(0)
+		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), TmpPower(0), Exp(0), Gold(0)
 	{
 
 	}
@@ -55,7 +55,7 @@ void Character::TakeDamage(int damage)
 
 	SetHealth(max(GetHealth() - damage, 0));
 	
-	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth << endl;
+	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
 }
 
 void Character::Heal(int amount)
