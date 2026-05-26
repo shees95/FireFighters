@@ -92,7 +92,7 @@ void Battle::MonsterVictory()
 
 void Battle::GiveReward()
 {
-    Chr->GetInventory()->AddItem(Mst->GetDropItem());
+    Chr->GetInventory().AddItem(Mst->GetDropItem());
 }
 
 int Battle::Selector(int min, int max)
