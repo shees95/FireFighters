@@ -21,7 +21,9 @@ public:
 	void TakeDamage(int damage);
 	void PlayerStatus(); //상태 출력 함수
 	bool IsDead() const; //상대 확인 함수
-	void UseItem(Item* item); //아이템 사용 함수
+	void AddItem(Item item);
+	void UseRandomitem();
+	void DisplayItems();
 
 	~Character(); //소멸자
 
@@ -47,7 +49,8 @@ public:
 
 	int GetMaxHealth() const { return MaxHealth; }
 
-	Inventory* GetInventory() const { return Inventory; } //인벤토리 포인터 반환
+	int GetInventorySize() const; //인벤토리 크기 반환 함수
+	int GetInventoryItemCount() const; //인벤토리에 있는 아이템 개수 반환 함수
 
 private:
 	static Character* Instance; //싱글톤 패턴을 위한 정적 멤버 변수
@@ -63,5 +66,5 @@ private:
 	int TmpPower; //일시적으로 증가한 공격력을 저장하는 변수
 	int Exp;
 	int Gold;
-	Inventory* Inventory; //인벤토리 포인터
+	Inventory* CurrentInventory; //인벤토리 포인터
 };
