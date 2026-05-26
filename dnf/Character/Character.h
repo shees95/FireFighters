@@ -23,7 +23,6 @@ public:
 	bool IsDead() const; //상대 확인 함수
 	void UseItem(Item* item); //아이템 사용 함수
 
-
 	~Character(); //소멸자
 
 public:
@@ -61,7 +60,7 @@ private:
 	int MaxHealth;
 	int Health;
 	int Power;
-	int tmpPower; //일시적으로 증가한 공격력을 저장하는 변수
+	int TmpPower; //일시적으로 증가한 공격력을 저장하는 변수
 	int Exp;
 	int Gold;
 	Inventory* Inventory; //인벤토리 포인터

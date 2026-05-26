@@ -6,10 +6,10 @@ using namespace std;
 
 void Inventory::AddItem(Item item)            //inventory.addItem(hpPotion);
                                               //inventory.addItem(attackPotion);
-{                                             // ¸ÞÀÎ ÇÔ¼ö¿¡¼­ ÀÌ°É·Î Ãß°¡°¡´É
+{                                             // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì°É·ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
     items.push_back(item);
 
-    cout << item.GetName()<< " È¹µæ!" << endl;
+    cout << item.GetName()<< " È¹ï¿½ï¿½!" << endl;
 }
 
 bool Inventory::RemoveItem(Item item)
@@ -19,7 +19,7 @@ bool Inventory::RemoveItem(Item item)
         if (items[i].GetName() == item.GetName())
         {
             items.erase(items.begin() + i);
-            cout << item.GetName() << " Á¦°Å ¿Ï·á!" << endl;
+            cout << item.GetName() << " ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!" << endl;
             return true;
         }
     }
@@ -35,7 +35,7 @@ void Inventory::SortItemByPrice()
             return a.GetPrice() < b.GetPrice();
         });
 
-    cout << "°¡°Ý ¿À¸§Â÷¼ø Á¤·Ä ¿Ï·á!"
+    cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!"
         << endl;
 }
 
@@ -44,7 +44,7 @@ void Inventory::UseRandomItem(Actor* actor)
     {
         if (items.empty())
         {
-            cout << "»ç¿ëÇÒ ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù."
+            cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."
                 << endl;
 
             return;
@@ -53,12 +53,12 @@ void Inventory::UseRandomItem(Actor* actor)
         int randomIndex = rand() % items.size();
 
         cout << items[randomIndex].GetName()
-            << " ·£´ý »ç¿ë!"
+            << " ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½!"
             << endl;
 
         items[randomIndex].Use(actor);
 
-        cout << items[randomIndex].GetName() << "ÀÌ ÀÎº¥Åä¸®¿¡¼­ »ç¿ëµÇ¾ú½À´Ï´Ù." << endl;;
+        cout << items[randomIndex].GetName() << "ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;;
        
         items.erase(items.begin() + randomIndex);
 
