@@ -7,8 +7,8 @@ using namespace std;
 #include "Monster.h"
 #include "../Character/Character.h"
 
-Monster::Monster(string Name, int Health, int Power)
-	:Name(Name), Health(Health), Power(Power)
+Monster::Monster(string Name, int Health, int Power, Item DropItem)
+	:Name(Name), Health(Health), Power(Power), DropItem(DropItem)
 {
 }
 
@@ -18,19 +18,17 @@ int Monster::GetRandomValue(int Min, int Max)
 	return rand() % (Max - Min + 1) + Min;
 }
 
-void Monster::Attack(Character& Character)
+void Monster::Attack(Character& character)
 {
-	cout << Name << "이 " << Character.GetName() << "을 공격합니다!";
-	Character.SetHealth(Character.GetHealth() - Power);
-
-	cout << Character.GetName() << " 체력 : " << Character.GetHealth()+ Power << " -> " << Character.GetHealth() << "(" << Power << ")" << endl;
+	cout << Name << "이 " << character.GetName() << "을 공격합니다!" << endl;
+	character.TakeDamage(Power);
 }
 
-void Monster::TakeDamage(Character& Character)
+void Monster::TakeDamage(int Damage)
 {
-	Health -= Character.GetPower();
-	cout << Character.GetName() << "가 " << Name << "을 공격합니다! "
-		<< Name << " 체력: " << Health + Character.GetPower() << " -> " << Health << "(" << Character.GetPower() << ")" << endl;
+	cout << Name << "이(가) 공격 받았습니다!" << endl;
+	Health -= Damage;
+	cout << "체력 : " << Health + Damage << " -> " << Health << " (-" << Damage << ")" << endl;
 }
 
 
@@ -48,29 +46,29 @@ Monster Monster::SpawnRandomMonster(int CharacterLevel)
 	switch (RandomIndex)
 	{
 	case 0:
-		return Monster("슬라임", Health, Power);
+		return Monster("슬라임", Health, Power, Item("슬라임 젤리", 20));
 
 	case 1:
-		return Monster("고블린", Health, Power);
+		return Monster("고블린", Health, Power, Item("고블린의 손톱", 30));
 
 	case 2:
-		return Monster("오크", Health, Power);
+		return Monster("오크", Health, Power, Item("오크의 가죽", 40));
 
 	case 3:
-		return Monster("스켈레톤", Health, Power);
+		return Monster("스켈레톤", Health, Power, Item("스켈레톤의 뼈", 50));
 
 	default:
-		return Monster("슬라임", Health, Power);
+		return Monster("슬라임", Health, Power, Item("슬라임 젤리", 20));
 	}
 }
 
 Monster Monster::SpawnBossMonster(int CharacterLevel)
 {
 	//보스 몬스터는 기존 몬스터보다 1.5배 스텟
-	int Health = GetRandomValue(CharacterLevel * 20 * 1.5, CharacterLevel * 30 * 1.5);
-	int Power = GetRandomValue(CharacterLevel * 5 * 1.5, CharacterLevel * 10 * 1.5);
+	int Health = GetRandomValue((int)(CharacterLevel * 20 * 1.5),(int)(CharacterLevel * 30 * 1.5));
+	int Power = GetRandomValue((int)(CharacterLevel * 5 * 1.5),(int)(CharacterLevel * 10 * 1.5));
 
-	return Monster("짱짱쎈 투명드래곤", Health, Power);
+	return Monster("짱짱쎈 투명드래곤", Health, Power, Item("짱짱쎈 투명 드래곤 하트!!!!", 99999));
 }
 
 
