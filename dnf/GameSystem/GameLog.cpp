@@ -32,7 +32,7 @@ void GameLog::LogCharacterSpawn(const Character& CharacterRef)
 }
 
 // 몬스터 스폰 기록 및 카운트 누적
-void GameLog::LogMonsterSpawn(const Monster& MonsterRef)
+void GameLog::LogMonsterSpawn(Monster& MonsterRef) // Monster 클래스 GetName()이 const 함수가 아니라 const 삭제했습니다!
 {
     string name = MonsterRef.GetName(); // 클래스 함수명 아직 안 맞음
     MonsterSpawnCount[name]++; // 몬스터별 스폰 횟수 누적

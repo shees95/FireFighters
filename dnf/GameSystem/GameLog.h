@@ -16,7 +16,7 @@ public:
 	void ClearBattleLog(); // 새로운 배틀이 시작되면 화변에 카운터 변수를 0으로 초기화
 
 	void LogCharacterSpawn(const Character& CharacterRef); // 플레이어 객채 받아오는 함수 (참조자)
-	void LogMonsterSpawn(const Monster& MonsterRef); // 몬스터 객채 받아오는 함수 (참조자)
+	void LogMonsterSpawn(Monster& MonsterRef); // 몬스터 객채 받아오는 함수 (참조자)
 
 	void LogPlayerAttack(std::string MonsterName, int Damage); // 플레이어가 피해
 	void LogPlayerDamaged(std::string MonsterName, int Damage); // 플레이어가 피격
