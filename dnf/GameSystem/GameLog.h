@@ -20,7 +20,7 @@ public:
 
 	void LogPlayerAttack(std::string MonsterName, int Damage); // 플레이어가 피해
 	void LogPlayerDamaged(std::string MonsterName, int Damage); // 플레이어가 피격
-	void LogItemUse(const Item& ItemRef); // 아이템 사용
+	void LogItemUse(Item& ItemRef); // 아이템 사용
 	void LogMonsterKill(std::string MonsterName); // 처치 몬스터 누적
 
 	void LogSceneChange(std::string Location); // 메뉴 이동 시 출력 
