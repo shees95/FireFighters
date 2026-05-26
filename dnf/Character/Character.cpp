@@ -15,15 +15,11 @@ Character* Character::Instance = nullptr;
 //생성자
 	Character::Character()
 		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), TmpPower(0), Exp(0), Gold(0)
-	{
-		CurrentInventory = new Inventory();
-	}
+	{}
 
 //소멸자
 	Character::~Character() 
-	{
-		delete CurrentInventory;
-	}
+	{}
 
 	//싱글톤 객체 반환
 	Character* Character::GetInstance()
@@ -124,10 +120,10 @@ void Character::PlayerStatus()
 
 void Character::AddItem(Item item)
 {
-	CurrentInventory->AddItem(item);
+	Inven.AddItem(item);
 }
 
 void Character::DisplayItems()
 {
-	CurrentInventory->PrintInventory();
+	Inven.PrintInventory();
 }
