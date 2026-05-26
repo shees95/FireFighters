@@ -25,7 +25,7 @@ GameManager::~GameManager()
 Character* GameManager::CreateCharacter(string name)
 {
 	// Player = new Character();      // 생성자에서 기본값 자동 세팅
-	Character* Player = Character::GetInstance();
+	Player = Character::GetInstance(); // 싱글톤 패턴으로 멤버 변수 초기화
 	Player->SetName(name);         // 이름만 따로 세팅
 	
 	return Player;
@@ -64,7 +64,7 @@ void GameManager::StartGame()
 	cout << "[ Text-Console RPG ]" << "\n";
 	cout << "===========================================" << "\n";
 
-	// 이름 입력 받기 (유효성 검사 추가)
+	// 이름 입력 받기
 	string name;
 	cout << "캐릭터 이름을 입력하세요. : ";
 	cin >> name;
@@ -95,8 +95,9 @@ void GameManager::Basecamp()
 		{
 		case 1: // 던전 입장
 		{
-			// SpawnMonster(Player->GetLevel());
 			// 전투 시작
+			SpawnMonster(Player->GetLevel());
+
 			delete CurrentBattle;  // 이전 전투 메모리 해제
 			CurrentBattle = new Battle(Player, CurrentMonster);
 			CurrentBattle->StartBattle();
@@ -110,7 +111,9 @@ void GameManager::Basecamp()
 		case 3: // 상점 입장 (도전 과제)
 
 			break;
+
 		case 0: // 게임 종료
+
 			return; // MainMenu 함수 종료
 
 		default:

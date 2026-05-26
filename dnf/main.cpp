@@ -10,5 +10,7 @@ int main(void)
 
 	GM.Basecamp();
 
+	Character::DestroyInstance();
+
     return 0;
 }
