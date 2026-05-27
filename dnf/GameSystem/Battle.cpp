@@ -47,7 +47,8 @@ void Battle::StartBattle()
         if (Mst->GetHealth() <= 0)
         {
             PlayerVictory();
-            Chr->GainExp(20);
+            Chr->GainExp(50);
+            Chr->SetGold(Chr->GetGold() + rand() % 10 + 10);
             GiveReward();
             GameManager::GL.LogMonsterKill(Mst->GetName());
             
