@@ -87,6 +87,7 @@ void GameManager::MainLoop()
 		{
 		case 1: // 던전 입장
 		{
+			system("cls");
 			GameManager::GL.LogSceneChange("던전");
 			// 전투 시작
 			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
@@ -99,11 +100,13 @@ void GameManager::MainLoop()
 			break;
 		}
 		case 2: // 인벤토리 확인
+			system("cls");
 			GameManager::GL.LogSceneChange("인벤토리");
 			Player->DisplayItems();
 			break;
 
 		case 3: // 상점 입장 (도전 과제)
+			system("cls");
 			GameManager::GL.LogSceneChange("상점");
 			GameShop.OpenShop(*Player);
 			break;
