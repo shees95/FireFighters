@@ -61,21 +61,6 @@ std::string Util::SelectorString(const std::string& prompt)
             continue;
         }
 
-        bool onlyDigits = true;
-        for (char c : input)
-        {
-            if (!isdigit(c))
-            {
-                onlyDigits = false;
-                break;
-            }
-        }
-        if (onlyDigits)
-        {
-            cout << "문자를 포함해주세요.\n";
-            continue;
-        }
-
         return input;  // 유효한 입력
     }
 }
