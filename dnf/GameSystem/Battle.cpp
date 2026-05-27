@@ -1,9 +1,14 @@
 ﻿#include <iostream>
 #include "Battle.h"
+
+#include "GameLog.h"
+#include "../GameManager/GameManager.h"
 #include "../Character/Character.h"
 #include "../Monster/Monster.h"
 #include "../Item/Item.h"
 #include "../Interface/Util.h"
+
+GameLog GameManager::GameLog;
 
 Battle::Battle(Character* InChr, Monster* InMst)
     : Chr(InChr), Mst(InMst)
@@ -19,6 +24,8 @@ Battle::~Battle()
 
 void Battle::StartBattle()
 {
+    GameManager::GameLog.ClearBattleLog();
+    
     // 전투 시작
     std::cout << "\n\n";
     std::cout << Mst->GetName() << " (이)가 나타났다!";
@@ -36,6 +43,7 @@ void Battle::StartBattle()
         {
             PlayerVictory();
             GiveReward();
+            GameManager::GameLog.LogMonsterKill(Mst->GetName());
             
             SetIsOnBattle(false);   // 전투 종료
             std::cout << "\n\n";
