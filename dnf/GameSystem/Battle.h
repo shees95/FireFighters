@@ -15,7 +15,7 @@ public:
     
     void StartBattle();
     
-    void PlayerTurn();
+    int PlayerTurn();
     void MonsterTurn();
     
     void PlayerVictory();

@@ -24,6 +24,8 @@ Battle::~Battle()
 
 void Battle::StartBattle()
 {
+    int selection = -1;
+    
     GameManager::GL.ClearBattleLog();
     
     // 전투 시작
@@ -36,7 +38,16 @@ void Battle::StartBattle()
     // 전투 루프
     while (GetIsOnBattle())
     {
-        PlayerTurn();
+        selection = PlayerTurn();
+        if (selection == 0)
+        {
+            MonsterVictory();
+            
+            SetIsOnBattle(false);
+            std::cout << "\n\n";
+            break;
+        }
+        
         std::cout << "\n\n";
         
         if (Mst->GetHealth() <= 0)
@@ -65,15 +76,16 @@ void Battle::StartBattle()
     }
 }
 
-void Battle::PlayerTurn()
+int Battle::PlayerTurn()
 {
+    int selection = -1;
     std::cout << "플레이어 턴!" << std::endl;
     std::cout << "1. 공격 2. 방어 3. 아이템 사용 0. 도망" << std::endl;
-    switch (Util::SelectorInt(0, 3))
+    switch (selection = Util::SelectorInt(0, 3))
     {
     case 0:
         MonsterVictory();
-        break;
+        return selection;
         
     case 1:
         Chr->Attack(Mst);
@@ -93,6 +105,8 @@ void Battle::PlayerTurn()
         std::cout << "이 UI는 버그 UI 입니다.\n" << std::endl;
         break;
     }
+    
+    return selection;
 }
 
 void Battle::MonsterTurn()
