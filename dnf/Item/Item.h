@@ -32,6 +32,7 @@ public:
     
     std::string GetName() { return Name; };
     int GetPrice()const { return Price; };
+    ItemType GetType() { return Type; };
 
 
 private:
