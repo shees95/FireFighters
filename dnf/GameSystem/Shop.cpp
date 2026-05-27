@@ -6,6 +6,7 @@ using namespace std;
 #include "../Item/Item.h"
 #include "Shop.h"
 #include "../Character/Character.h"
+#include "../Interface/Util.h"
 
 Shop::Shop()
 {
@@ -17,7 +18,6 @@ void Shop::OpenShop(Character& character)
 {
 	while (true)
 	{
-		int choice = 0;
 		// 상점 메뉴 출력
 		cout << endl
 			<< "----------------------" << endl
@@ -25,10 +25,9 @@ void Shop::OpenShop(Character& character)
 			<< "----------------------" << endl
 			<< "1. 구매" << endl
 			<< "2. 판매" << endl
-			<< "0. 나가기" << endl
-			<< "선택 :";
-
-		cin >> choice;
+			<< "0. 나가기" << endl;
+		
+		int choice = Util::SelectorInt(0, 2);
 
 		//상점 메뉴 선택
 		switch (choice)
@@ -37,15 +36,11 @@ void Shop::OpenShop(Character& character)
 		{
 			ShowProduct(character);
 
-			int ProductIndex;
-
-			cout << endl << " 구매할 상품의 번호를 입력해주세요." << endl
-				<< "선택 :";
-			cin >> ProductIndex;
-			cout << endl;
+			cout << endl << " 구매할 상품의 번호를 입력해주세요." << endl;
+				
+			int ProductIndex = Util::SelectorInt(0, static_cast<int>(Products.size()));
 
 			Buy(ProductIndex, character);
-
 			break;
 		}
 		case 2:
@@ -57,12 +52,6 @@ void Shop::OpenShop(Character& character)
 		{
 			cout << "상점을 나갑니다." << endl;
 			return;
-		}
-
-		default:
-		{
-			cout << "잘못된 입력입니다." << endl;
-			break;
 		}
 		}
 	}
@@ -87,8 +76,6 @@ void Shop::ShowProduct(Character& character)
 
 void Shop::Buy(int ProductIndex, Character& character)
 {
-	int Index = ProductIndex - 1;
-
 	//0. 나가기 구현
 	if (ProductIndex == 0)
 	{
@@ -96,12 +83,7 @@ void Shop::Buy(int ProductIndex, Character& character)
 	}
 
 	// 번호 잘못 입력했을 때 처리
-	if (Index < 0 || Index >= static_cast<int>(Products.size()))
-	{
-		cout << "잘못된 상품 번호입니다." << endl;
-		return;
-	}
-
+	int Index = ProductIndex - 1;
 	Item item = Products[Index];
 
 	// 골드 부족
@@ -143,14 +125,8 @@ void Shop::Sell(Character& character)
 		}
 
 		// 판매 아이템 선택
-		int SellIndex;
-		cout << endl
-			<< "판매할 아이템 번호 입력"
-			<< endl
-			<< "선택 : ";
-
-		cin >> SellIndex;
-		int Index = SellIndex - 1;
+		cout << endl << "판매할 아이템 번호를 입력해주세요." << endl;
+		int SellIndex = Util::SelectorInt(0, static_cast<int>(inventory.GetInventorySize()));
 
 		//0.나가기 구현
 		if (SellIndex == 0)
@@ -158,12 +134,7 @@ void Shop::Sell(Character& character)
 			return;
 		}
 
-		//번호 잘못 입력했을 때 처리
-		if (Index < 0 || Index >= static_cast<int>(inventory.GetInventorySize()))
-		{
-			cout << "잘못된 번호입니다." << endl;
-			continue;
-		}
+		int Index = SellIndex - 1;
 
 		// 아이템 가져오기
 		Item item = inventory.GetItem(Index);
