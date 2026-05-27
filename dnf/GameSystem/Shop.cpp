@@ -16,6 +16,7 @@ Shop::Shop()
 
 void Shop::OpenShop(Character& character)
 {
+	system("cls");
 	while (true)
 	{
 		// 상점 메뉴 출력
@@ -34,12 +35,14 @@ void Shop::OpenShop(Character& character)
 		{
 		case 1:
 		{
+			system("cls");
 			ShowProduct(character);
 
 			cout << endl << " 구매할 상품의 번호를 입력해주세요." << endl;
 				
 			int ProductIndex = Util::SelectorInt(0, static_cast<int>(Products.size()));
 
+			system("cls");
 			Buy(ProductIndex, character);
 			break;
 		}
@@ -50,7 +53,8 @@ void Shop::OpenShop(Character& character)
 		}
 		case 0:
 		{
-			cout << "상점을 나갑니다." << endl;
+			system("cls");
+			cout << "상점을 나갑니다." << endl << endl;
 			return;
 		}
 		}
@@ -59,6 +63,7 @@ void Shop::OpenShop(Character& character)
 
 void Shop::ShowProduct(Character& character)
 {
+	
 	//번호를 매기며 모든 상품의 이름과 가격 표시
 	cout << endl 
 		<< "------------------" << endl
@@ -70,7 +75,7 @@ void Shop::ShowProduct(Character& character)
 		cout << i + 1 << "." << Products[i].GetName() << " - 가격 : " << Products[i].GetPrice() << "골드" << endl;
 	}
 	cout << "0. 나가기" << endl;
-	cout << "현재 골드 : " << character.GetGold() << "G" << endl;
+	cout << endl <<"현재 골드 : " << character.GetGold() << "G" << endl;
 }
 
 
@@ -105,7 +110,7 @@ void Shop::Buy(int ProductIndex, Character& character)
 void Shop::Sell(Character& character)
 {
 	Inventory& inventory = character.GetInventory();
-
+	system("cls");
 	while (true)
 	{
 		cout << endl
@@ -120,7 +125,6 @@ void Shop::Sell(Character& character)
 		// 인벤토리가 비어있으면 종료
 		if (inventory.GetInventorySize() == 0)
 		{
-			cout << "보유한 아이템이 없습니다." << endl;
 			return;
 		}
 
@@ -131,6 +135,7 @@ void Shop::Sell(Character& character)
 		//0.나가기 구현
 		if (SellIndex == 0)
 		{
+			system("cls");
 			return;
 		}
 
@@ -147,6 +152,7 @@ void Shop::Sell(Character& character)
 
 		// 인벤토리 제거
 		inventory.RemoveItem(item);
+		system("cls");
 
 		cout << endl
 		     << item.GetName() << " 판매 완료!" << endl;
