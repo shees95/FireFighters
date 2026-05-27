@@ -84,8 +84,7 @@ int Battle::PlayerTurn()
     switch (selection = Util::SelectorInt(0, 3))
     {
     case 0:
-        MonsterVictory();
-        return selection;
+        break;
         
     case 1:
         Chr->Attack(Mst);
