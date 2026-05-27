@@ -1,6 +1,8 @@
 ﻿#include "Item.h"
 #include "../Character/Character.h"
 #include <iostream>
+#include "../GameManager/GameManager.h"
+#include "../GameSystem/GameLog.h"
 
 using namespace std;
 
@@ -19,12 +21,24 @@ void Item::Use(Character* character)
     {
     case 0:
         cout << Name << " 사용!" << endl;
+        GameManager::GL.LogItemUse(*this);
         cout << "체력 " << EffectValue << " 회복!" << endl;
-        character->SetHealth(character->GetHealth() + EffectValue);
+        if (character->GetHealth() + EffectValue >= character->GetMaxHealth())
+        {
+            character->SetHealth(character->GetMaxHealth());
+            cout << "회복량이 최대 체력을 넘어 최대 체력까지만 회복되었습니다.";
+        }
+        else
+        {
+            character->SetHealth(character->GetHealth() + EffectValue);
+        }
+        
+        
         break;
 
     case 1:
         cout << Name << " 사용!" << endl;
+        GameManager::GL.LogItemUse(*this);
         cout << "공격력 " << EffectValue << " 증가!" << endl;
         character->SetTempPower(character->GetTempPower() + EffectValue);
         cout << "이번 전투 동안만 효과가 유지됩니다." << endl;
