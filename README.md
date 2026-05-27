@@ -51,7 +51,6 @@ ex) GameLog 개발자 : Character의 스탯 Getter좀 만들어주세요. 제가
 - GameManager : 전용준  
   
 - Character : 최석훈  
-- Inventory : 최석훈  
   
 - Monster : 최호용  
   
@@ -63,3 +62,4 @@ ex) GameLog 개발자 : Character의 스탯 Getter좀 만들어주세요. 제가
   
 - Item : 임찬우  
 - ItemType : 임찬우  
+- Inventory : 임찬우  
