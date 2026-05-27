@@ -49,16 +49,29 @@ void Inventory::UseRandomItem(Actor* actor)
 
             return;
         }
+        
+        vector<int>UseType;
+        for (int i = 0; i < items.size(); i++)
+        {
+            if (items[i].GetType() == ItemType::Use)
+            {
+                UseType.push_back(i);
+            }
+        }
+        if (UseType.empty()) 
+            {
+                cout << "사용 가능한 아이템이 없습니다.\n"; return; 
+            }
+        int Random = rand() % UseType.size();
+        int RandomIndex = UseType[Random];
 
-        int randomIndex = rand() % items.size();
+        cout << "랜덤으로 " << items[RandomIndex].GetName() << " 이(가) 사용됐습니다. " << endl;
 
-        cout << "랜덤으로 " << items[randomIndex].GetName() << " 이(가) 사용됐습니다. " << endl;
+        items[RandomIndex].Use(actor);
 
-        items[randomIndex].Use(actor);
-
-        cout  << items[randomIndex].GetName() << "이(가) 사용되어 인벤토리에서 사라집니다." << endl;;
+        cout  << items[RandomIndex].GetName() << "이(가) 사용되어 인벤토리에서 사라집니다." << endl;;
        
-        items.erase(items.begin() + randomIndex);
+        items.erase(items.begin() + RandomIndex);
 
 
     }
