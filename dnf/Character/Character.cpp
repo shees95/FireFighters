@@ -47,7 +47,13 @@ Character* Character::Instance = nullptr;
 	{
 		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
 		monster->TakeDamage(GetTotalPower());
+
+		if (monster->GetHealth() <= 0)
+		{
+			ResetTmpPower();
+		}
 	}
+
 
 //Damage를 입는 함수
 void Character::TakeDamage(int damage)
@@ -57,6 +63,11 @@ void Character::TakeDamage(int damage)
 	SetHealth(max(GetHealth() - damage, 0));
 	
 	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
+
+	if (IsDead())
+	{
+		ResetTmpPower(); //전투 종료 후 일시적으로 증가한 공격력 초기화
+	}
 }
 
 void Character::Heal(int amount)
@@ -116,7 +127,7 @@ bool Character::IsDead() const
 void Character::PlayerStatus()
 {
 	cout << "Lv." << Level << " " << Name << " (exp " << Exp << "/100)" << endl;
-	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << Power << endl;
+	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << GetTotalPower() << endl;
 	cout << "Gold: " << Gold << "G" << endl;
 }
 
@@ -137,10 +148,6 @@ void Character::UseRandomItem()
 
 void Character::ResetTmpPower()
 {
-	if (TmpPower > 0)
-	{
 		cout << "일시적으로 증가한 공격력이 초기화됩니다." << endl;
 		TmpPower = 0;
-	}
-	
 }
