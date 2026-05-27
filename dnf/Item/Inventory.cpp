@@ -86,7 +86,7 @@ void Inventory::PrintInventory()
     for (int i = 0; i < items.size(); i++)
     {
         cout << i + 1 << ". "
-            << items[i].GetName()
+            << items[i].GetName() << "   " <<items[i].GetPrice() <<" G"
             << endl;
     }
 }
