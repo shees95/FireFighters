@@ -8,7 +8,7 @@ class Battle : public Actor
 {
 public:
     Battle(Character* InChr, Monster* InMst);
-    ~Battle();
+    ~Battle() {}
     
     void SetIsOnBattle(bool InIsOnBattle) { IsOnBattle = InIsOnBattle; }
     bool GetIsOnBattle() { return IsOnBattle; }
