@@ -49,6 +49,7 @@ Character* Character::Instance = nullptr;
 		monster->TakeDamage(GetTotalPower());
 	}
 
+
 //Damage를 입는 함수
 void Character::TakeDamage(int damage)
 {
@@ -116,7 +117,7 @@ bool Character::IsDead() const
 void Character::PlayerStatus()
 {
 	cout << "Lv." << Level << " " << Name << " (exp " << Exp << "/100)" << endl;
-	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << Power << endl;
+	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << GetTotalPower() << endl;
 	cout << "Gold: " << Gold << "G" << endl;
 }
 
@@ -137,10 +138,6 @@ void Character::UseRandomItem()
 
 void Character::ResetTmpPower()
 {
-	if (TmpPower > 0)
-	{
 		cout << "일시적으로 증가한 공격력이 초기화됩니다." << endl;
 		TmpPower = 0;
-	}
-	
 }
