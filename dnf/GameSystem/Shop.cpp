@@ -35,7 +35,7 @@ void Shop::OpenShop(Character& character)
 		{
 		case 1:
 		{
-			ShowProduct();
+			ShowProduct(character);
 
 			int ProductIndex;
 
@@ -68,7 +68,7 @@ void Shop::OpenShop(Character& character)
 	}
 }
 
-void Shop::ShowProduct()
+void Shop::ShowProduct(Character& character)
 {
 	//번호를 매기며 모든 상품의 이름과 가격 표시
 	cout << endl 
@@ -81,6 +81,7 @@ void Shop::ShowProduct()
 		cout << i + 1 << "." << Products[i].GetName() << " - 가격 : " << Products[i].GetPrice() << "골드" << endl;
 	}
 	cout << "0. 나가기" << endl;
+	cout << "현재 골드 : " << character.GetGold() << "G" << endl;
 }
 
 
