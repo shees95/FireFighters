@@ -41,16 +41,18 @@ void Battle::StartBattle()
             std::cout << "\n\n";
             break;
         }
+        // 스탯 확인
+        if (selection == 2 || selection == 3) continue;
         
         std::cout << "\n\n";
         
         if (Mst->GetHealth() <= 0)
         {
+            GameManager::GL.LogMonsterKill(Mst->GetName());
             PlayerVictory();
             Chr->GainExp(50);
             Chr->SetGold(Chr->GetGold() + rand() % 10 + 10);
             GiveReward();
-            GameManager::GL.LogMonsterKill(Mst->GetName());
             
             SetIsOnBattle(false);   // 전투 종료
             std::cout << "\n\n";
@@ -70,29 +72,36 @@ void Battle::StartBattle()
         std::cout << "\n\n";
         
     }
+
+    Chr->ResetTmpPower();
+    GameManager::GL.ClearBattleLog();
 }
 
 int Battle::PlayerTurn()
 {
     int selection = -1;
     std::cout << "플레이어 턴!" << std::endl;
-    std::cout << "1. 공격 2. 방어 3. 아이템 사용 0. 도망" << std::endl;
-    switch (selection = Util::SelectorInt(0, 3))
+    std::cout << "1. 공격\t2. 내 스탯 확인\t3. 몬스터 스탯 확인\t4. 아이템 사용\t0. 도망" << std::endl;
+    switch (selection = Util::SelectorInt(0, 4))
     {
     case 0:
         break;
         
     case 1:
+        GameManager::GL.LogPlayerAttack(Chr, Mst);
         Chr->Attack(Mst);
         break;
         
     case 2:
-        std::cout << "방어는 구현 안했지롱\n턴은 넘어갔다!\n" << std::endl;
+        Chr->PlayerStatus();
         break;
         
     case 3:
-        Chr->GetInventory().PrintInventory();
+        Mst->MonsterStatus();
+        break;
         
+    case 4:
+        Chr->GetInventory().PrintInventory();
         Chr->UseRandomItem();
         break;
         
@@ -106,7 +115,8 @@ int Battle::PlayerTurn()
 
 void Battle::MonsterTurn()
 {
-    Mst->Attack(*Chr);
+    GameManager::GL.LogPlayerDamaged(Mst);
+    Mst->Attack(Chr);
 }
 
 void Battle::PlayerVictory()

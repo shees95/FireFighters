@@ -20,7 +20,8 @@ public:
     void UseRandomItem(Character* character);
 
     void PrintInventory();
-
+    void PrintSellInventory();
+    
     std::size_t GetInventorySize() const { return items.size(); };
 
     void PrintUseItems();

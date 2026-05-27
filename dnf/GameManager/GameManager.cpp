@@ -79,11 +79,12 @@ void GameManager::MainLoop()
 	{
 		cout << "=== 베이스캠프 ===" << "\n";
 		cout << "1. 던전 입장" << "\n";
-		cout << "2. 인벤토리 확인" << "\n";
-		cout << "3. 상점 입장" << "\n";
+		cout << "2. 스탯 확인" << "\n";
+		cout << "3. 인벤토리 확인" << "\n";
+		cout << "4. 상점 입장" << "\n";
 		cout << "0. 게임 종료" << "\n";
 
-		switch (Util::SelectorInt(0, 3))
+		switch (Util::SelectorInt(0, 4))
 		{
 		case 1: // 던전 입장
 		{
@@ -110,11 +111,16 @@ void GameManager::MainLoop()
 		}
 		case 2: // 인벤토리 확인
 			system("cls");
+			Player->PlayerStatus();
+			break;
+			
+		case 3: // 인벤토리 확인
+			system("cls");
 			GameManager::GL.LogSceneChange("인벤토리");
 			Player->DisplayItems();
 			break;
 
-		case 3: // 상점 입장 (도전 과제)
+		case 4: // 상점 입장 (도전 과제)
 			system("cls");
 			GameManager::GL.LogSceneChange("상점");
 			GameShop.OpenShop(*Player);
@@ -123,6 +129,9 @@ void GameManager::MainLoop()
 		case 0: // 게임 종료
 			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
 			delete CurrentBattle;  CurrentBattle = nullptr; // 이전 전투 메모리 해제
+			
+			GL.PrintVisitedLog();
+			
 			cout << "게임 종료" << "\n";
 			return; // MainLoop 함수 종료
 

@@ -16,14 +16,16 @@ Shop::Shop()
 
 void Shop::OpenShop(Character& character)
 {
-	system("cls");
+	
 	while (true)
 	{
+		system("cls");
+		
 		// 상점 메뉴 출력
 		cout << endl
-			<< "----------------------" << endl
-			<< "  상점에 어서오세요!" << endl
-			<< "----------------------" << endl
+			<< "--------------------------------------" << endl
+			<< "  상점에 어서오세요!\t\t현재 골드 : " << character.GetGold() << "G" << endl
+			<< "--------------------------------------" << endl
 			<< "1. 구매" << endl
 			<< "2. 판매" << endl
 			<< "0. 나가기" << endl;
@@ -38,7 +40,8 @@ void Shop::OpenShop(Character& character)
 			system("cls");
 			ShowProduct(character);
 
-			cout << endl << " 구매할 상품의 번호를 입력해주세요." << endl;
+			cout << endl;
+			cout << " 구매할 상품의 번호를 입력해주세요." << endl;
 				
 			int ProductIndex = Util::SelectorInt(0, static_cast<int>(Products.size()));
 
@@ -48,12 +51,15 @@ void Shop::OpenShop(Character& character)
 		}
 		case 2:
 		{
+			system("cls");
+				
 			Sell(character);
 			break;
 		}
 		case 0:
 		{
 			system("cls");
+				
 			cout << "상점을 나갑니다." << endl << endl;
 			return;
 		}
@@ -66,16 +72,15 @@ void Shop::ShowProduct(Character& character)
 	
 	//번호를 매기며 모든 상품의 이름과 가격 표시
 	cout << endl 
-		<< "------------------" << endl
-		<< " 판매 상품 리스트" << endl
-		<< "------------------" << endl;
+		<< "--------------------------------" << endl
+		<< " 판매 상품 리스트\t\t현재 골드 : " << character.GetGold() << "G" << endl
+		<< "--------------------------------" << endl;
 
 	for (size_t i = 0; i < Products.size(); i++)
 	{
 		cout << i + 1 << "." << Products[i].GetName() << " - 가격 : " << Products[i].GetPrice() << "골드" << endl;
 	}
 	cout << "0. 나가기" << endl;
-	cout << endl <<"현재 골드 : " << character.GetGold() << "G" << endl;
 }
 
 
@@ -114,12 +119,12 @@ void Shop::Sell(Character& character)
 	while (true)
 	{
 		cout << endl
-			 << "------------------" << endl
-			 << " 판매 메뉴 " << endl
-			 << "------------------" << endl;
+			 << "----------------------------" << endl
+			 << " 판매 메뉴\t\t현재 골드 : " << character.GetGold() << "G" << endl
+			 << "----------------------------" << endl;
 
 		// 인벤토리 출력
-		inventory.PrintInventory();
+		inventory.PrintSellInventory();
 		cout << "0. 나가기" << endl;
 
 		// 인벤토리가 비어있으면 종료

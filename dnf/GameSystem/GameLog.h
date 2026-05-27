@@ -18,8 +18,8 @@ public:
 	void LogCharacterSpawn(const Character& CharacterRef); // 플레이어 객채 받아오는 함수 (참조자)
 	void LogMonsterSpawn(Monster& MonsterRef); // 몬스터 객채 받아오는 함수 (참조자)
 
-	void LogPlayerAttack(std::string MonsterName, int Damage); // 플레이어가 피해
-	void LogPlayerDamaged(std::string MonsterName, int Damage); // 플레이어가 피격
+	void LogPlayerAttack(Character* player, Monster* Mst); // 플레이어가 피해
+	void LogPlayerDamaged(Monster* Mst); // 플레이어가 피격
 	void LogItemUse(Item& ItemRef); // 아이템 사용
 	void LogMonsterKill(std::string MonsterName); // 처치 몬스터 누적
 

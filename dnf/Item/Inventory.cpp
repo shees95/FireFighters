@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <iostream>
 
+#include "../GameManager/GameManager.h"
+
 using namespace std;
 
 void Inventory::AddItem(Item item)            //inventory.addItem(hpPotion);
@@ -40,40 +42,40 @@ void Inventory::SortItemByPrice()
 }
 
 void Inventory::UseRandomItem(Character* character)
+{
+    if (items.empty())
     {
-        if (items.empty())
-        {
-            cout << "인벤토리에 사용 가능한 아이템이 없습니다."
-                << endl;
+        cout << "인벤토리에 사용 가능한 아이템이 없습니다."
+            << endl;
 
-            return;
-        }
-        
-        vector<int>UseType;
-        for (int i = 0; i < items.size(); i++)
-        {
-            if (items[i].GetType() == ItemType::Use)
-            {
-                UseType.push_back(i);
-            }
-        }
-        if (UseType.empty()) 
-            {
-                cout << "사용 가능한 아이템이 없습니다.\n"; return; 
-            }
-        int Random = rand() % UseType.size();
-        int RandomIndex = UseType[Random];
-
-        cout << "랜덤으로 " << items[RandomIndex].GetName() << " 이(가) 사용됐습니다. " << endl;
-
-        items[RandomIndex].Use(character);
-
-        cout  << items[RandomIndex].GetName() << "이(가) 사용되어 인벤토리에서 사라집니다." << endl;;
-       
-        items.erase(items.begin() + RandomIndex);
-
-
+        return;
     }
+    
+    vector<int>UseType;
+    for (int i = 0; i < items.size(); i++)
+    {
+        if (items[i].GetType() == ItemType::Use)
+        {
+            UseType.push_back(i);
+        }
+    }
+    if (UseType.empty()) 
+        {
+            cout << "사용 가능한 아이템이 없습니다.\n"; return; 
+        }
+    int Random = rand() % UseType.size();
+    int RandomIndex = UseType[Random];
+    GameManager::GL.LogItemUse(items[RandomIndex]);
+    cout << "랜덤으로 " << items[RandomIndex].GetName() << " 이(가) 사용됐습니다. " << endl;
+
+    items[RandomIndex].Use(character);
+
+    cout  << items[RandomIndex].GetName() << "이(가) 사용되어 인벤토리에서 사라집니다." << endl;;
+   
+    items.erase(items.begin() + RandomIndex);
+
+
+}
 
 void Inventory::PrintInventory()
 {
@@ -86,8 +88,23 @@ void Inventory::PrintInventory()
     for (int i = 0; i < items.size(); i++)
     {
         cout << i + 1 << ". "
-            << items[i].GetName() << "      기준가 : " <<items[i].GetPrice() <<" G"
-            << "      판매가 : " << items[i].GetSellPrice() << " G" << endl;
+            << items[i].GetName() << "\t\t(기준가 : " <<items[i].GetPrice() <<"G)" << endl;
+    }
+}
+
+
+void Inventory::PrintSellInventory()
+{
+    if (items.empty())
+    {
+        cout << "아이템이 없습니다.\n";
+        return;
+    }
+
+    for (int i = 0; i < items.size(); i++)
+    {
+        cout << i + 1 << ". "
+            << items[i].GetName()<< "\t\t(판매가 : " << items[i].GetSellPrice() << "G)" << endl;
     }
 }
 
