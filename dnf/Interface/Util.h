@@ -12,5 +12,5 @@ namespace Util
     bool SelectorBool();
 
     // 문자열 입력 받기 (유효성 검사 포함)
-    std::string SelectorString(std::string& prompt);
+    std::string SelectorString(const std::string& prompt);
 }
