@@ -48,7 +48,7 @@ ex) GameLog 개발자 : Character의 스탯 Getter좀 만들어주세요. 제가
   
 # dev 클래스  
   
-- GameManager : 전용준  
+- GameManager : 정용준  
   
 - Character : 최석훈  
   
