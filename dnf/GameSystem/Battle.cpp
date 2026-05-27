@@ -8,7 +8,7 @@
 #include "../Item/Item.h"
 #include "../Interface/Util.h"
 
-GameLog GameManager::GameLog;
+// GameLog GameManager::GameLog;
 
 Battle::Battle(Character* InChr, Monster* InMst)
     : Chr(InChr), Mst(InMst)
