@@ -16,12 +16,6 @@ Battle::Battle(Character* InChr, Monster* InMst)
     
 }
 
-Battle::~Battle()
-{
-    delete Chr; 
-    delete Mst;
-}
-
 void Battle::StartBattle()
 {
     int selection = -1;
