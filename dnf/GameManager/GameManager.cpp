@@ -108,7 +108,7 @@ void GameManager::MainLoop()
 
 		case 3: // 상점 입장 (도전 과제)
 			GameManager::GL.LogSceneChange("상점");
-
+			GameShop.OpenShop(*Player);
 			break;
 
 		case 0: // 게임 종료
