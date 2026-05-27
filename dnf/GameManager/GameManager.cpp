@@ -4,7 +4,7 @@
 
 #include "GameManager.h"
 
-GameLog GameManager::GameLog;
+GameLog GameManager::GL;
 
 using namespace std;
 
@@ -62,10 +62,8 @@ void GameManager::StartGame()
 	cout << "[ Text-Console RPG ]" << "\n";
 	cout << "===========================================" << "\n";
 
-	// 이름 입력 받기
-	string name;
-	cout << "캐릭터 이름을 입력하세요. : ";
-	cin >> name;
+	// 유틸리티로 이름 입력
+	string name = Util::SelectorString("캐릭터 이름을 입력하세요. : ");
 	cout << "\n";
 
 	// 캐릭터 생성
@@ -84,35 +82,32 @@ void GameManager::MainLoop()
 		cout << "2. 인벤토리 확인" << "\n";
 		cout << "3. 상점 입장" << "\n";
 		cout << "0. 게임 종료" << "\n";
-		cout << "선택 : ";
-		int choose;
-		cin >> choose;
-		cout << "\n";
 
-		switch (choose)
+		switch (Util::SelectorInt(0, 3))
 		{
 		case 1: // 던전 입장
 		{
-			GameManager::GameLog.LogSceneChange("던전");
+			GameManager::GL.LogSceneChange("던전");
 			// 전투 시작
 			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
 			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
 
+			//delete CurrentMonster; CurrentMonster = nullptr;
+			//delete CurrentBattle;  CurrentBattle = nullptr;
+
 			CurrentMonster = SpawnMonster(Player->GetLevel());
-			GameManager::GameLog.LogMonsterSpawn(*CurrentMonster);
+			GameManager::GL.LogMonsterSpawn(*CurrentMonster);
 			CurrentBattle = new Battle(Player, CurrentMonster);
 			CurrentBattle->StartBattle();
 			break;
 		}
 		case 2: // 인벤토리 확인
-			GameManager::GameLog.LogSceneChange("인벤토리");
-			// 인벤토리 아이템 출력 함수 호출
-			// Player->DisplayItems();
-
+			GameManager::GL.LogSceneChange("인벤토리");
+			Player->DisplayItems();
 			break;
 
 		case 3: // 상점 입장 (도전 과제)
-			GameManager::GameLog.LogSceneChange("상점");
+			GameManager::GL.LogSceneChange("상점");
 
 			break;
 
