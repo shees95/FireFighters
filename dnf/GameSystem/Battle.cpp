@@ -37,6 +37,7 @@ void Battle::StartBattle()
         {
             MonsterVictory();
             
+            Chr->UseRandomItem();
             SetIsOnBattle(false);
             std::cout << "\n\n";
             break;
@@ -50,6 +51,7 @@ void Battle::StartBattle()
             GiveReward();
             GameManager::GL.LogMonsterKill(Mst->GetName());
             
+            Chr->UseRandomItem();
             SetIsOnBattle(false);   // 전투 종료
             std::cout << "\n\n";
             break;
