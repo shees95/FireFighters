@@ -47,11 +47,6 @@ Character* Character::Instance = nullptr;
 	{
 		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
 		monster->TakeDamage(GetTotalPower());
-
-		if (monster->GetHealth() <= 0)
-		{
-			ResetTmpPower();
-		}
 	}
 
 
@@ -63,11 +58,6 @@ void Character::TakeDamage(int damage)
 	SetHealth(max(GetHealth() - damage, 0));
 	
 	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
-
-	if (IsDead())
-	{
-		ResetTmpPower(); //전투 종료 후 일시적으로 증가한 공격력 초기화
-	}
 }
 
 void Character::Heal(int amount)
