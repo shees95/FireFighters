@@ -39,8 +39,7 @@ void Inventory::SortItemByPrice()
         << endl;
 }
 
-void Inventory::UseRandomItem(Actor* actor)
-{
+void Inventory::UseRandomItem(Character* character)
     {
         if (items.empty())
         {
@@ -67,7 +66,7 @@ void Inventory::UseRandomItem(Actor* actor)
 
         cout << "랜덤으로 " << items[RandomIndex].GetName() << " 이(가) 사용됐습니다. " << endl;
 
-        items[RandomIndex].Use(actor);
+        items[RandomIndex].Use(character);
 
         cout  << items[RandomIndex].GetName() << "이(가) 사용되어 인벤토리에서 사라집니다." << endl;;
        
@@ -75,7 +74,6 @@ void Inventory::UseRandomItem(Actor* actor)
 
 
     }
-}
 
 void Inventory::PrintInventory()
 {

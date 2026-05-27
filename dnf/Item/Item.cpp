@@ -1,4 +1,5 @@
 ﻿#include "Item.h"
+#include "../Character/Character.h"
 #include <iostream>
 
 using namespace std;
@@ -12,20 +13,20 @@ Item::Item(std::string Name, ItemType Type, int EffectType, int EffectValue, int
 Item HpPotion("HP 포션", ItemType::Use, 0, 50, 100);              //HP포션 정의
 Item PowerPotion("Power 포션", ItemType::Use, 1, 10, 200);        //Power포션 정의
 
-void Item::Use(Actor* actor)
+void Item::Use(Character* character)
 {
     switch (EffectType)
     {
     case 0:
         cout << Name << " 사용!" << endl;
         cout << "체력 " << EffectValue << " 회복!" << endl;
-            // actor->Sethp(Gethp() + EffectValue);
+        character->SetHealth(character->GetHealth() + EffectValue);
         break;
 
     case 1:
         cout << Name << " 사용!" << endl;
         cout << "공격력 " << EffectValue << " 증가!" << endl;
-        // actor->SetTempPower(actor->GetTempPower() + EffectValue);
+        character->SetTempPower(character->GetTempPower() + EffectValue);
         cout << "이번 전투 동안만 효과가 유지됩니다." << endl;
         break;
     }

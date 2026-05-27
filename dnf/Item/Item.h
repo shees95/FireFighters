@@ -11,6 +11,7 @@
 //- []  공격력 + 10 : 해당 전투에만 효과 발휘
 //- []  플레이어 캐릭터 : 전투 중 아이템 랜덤 사용 가능
 
+class Character;
 
 enum class ItemType
 {
@@ -28,11 +29,11 @@ public:
     Item(std::string Name, ItemType Type, int EffectType, int EffectValue, int Price);
 
     
-    void Use(Actor* actor);
+    void Use(Character* character);
     
     std::string GetName() { return Name; };
     int GetPrice()const { return Price; };
-    ItemType GetType() { return Type; };
+    ItemType GetType()const { return Type; };
 
 
 private:
