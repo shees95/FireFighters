@@ -114,6 +114,7 @@ void GameManager::MainLoop()
 		case 0: // 게임 종료
 			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
 			delete CurrentBattle;  CurrentBattle = nullptr; // 이전 전투 메모리 해제
+			cout << "게임 종료" << "\n";
 			return; // MainLoop 함수 종료
 
 		default:
