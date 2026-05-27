@@ -86,8 +86,39 @@ void Inventory::PrintInventory()
     for (int i = 0; i < items.size(); i++)
     {
         cout << i + 1 << ". "
-            << items[i].GetName() << "   " <<items[i].GetPrice() <<" G"
-            << endl;
+            << items[i].GetName() << "      기준가 : " <<items[i].GetPrice() <<" G"
+            << "      판매가 : " << items[i].GetSellPrice() << " G" << endl;
     }
 }
 
+void Inventory::PrintUseItems()
+{
+    vector<int> UseType;
+
+    for (int i = 0; i < items.size(); i++)
+    {
+        if (items[i].GetType() == ItemType::Use)
+        {
+            UseType.push_back(i);
+        }
+    }
+
+    if (UseType.empty())
+    {
+        cout << "사용 가능한 아이템이 없습니다." << endl;
+        return;
+    }
+
+    cout << "[ 사용 가능한 아이템 ]" << endl;
+
+    for (int i = 0; i < UseType.size(); i++)
+    {
+        int index = UseType[i];
+
+        cout << i + 1 << ". "
+            << items[index].GetName()
+            << " "
+            << items[index].GetPrice() << "G"
+            << endl;
+    }
+}
