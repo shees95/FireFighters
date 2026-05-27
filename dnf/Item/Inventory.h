@@ -17,7 +17,7 @@ public:
 
     void SortItemByPrice();
 
-    void UseRandomItem(Actor* actor);
+    void UseRandomItem(Character* character);
 
     void PrintInventory();
 
