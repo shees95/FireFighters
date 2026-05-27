@@ -24,7 +24,7 @@ Battle::~Battle()
 
 void Battle::StartBattle()
 {
-    GameManager::GameLog.ClearBattleLog();
+    GameManager::GL.ClearBattleLog();
     
     // 전투 시작
     std::cout << "\n\n";
@@ -43,7 +43,7 @@ void Battle::StartBattle()
         {
             PlayerVictory();
             GiveReward();
-            GameManager::GameLog.LogMonsterKill(Mst->GetName());
+            GameManager::GL.LogMonsterKill(Mst->GetName());
             
             SetIsOnBattle(false);   // 전투 종료
             std::cout << "\n\n";
