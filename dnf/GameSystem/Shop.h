@@ -15,7 +15,7 @@ public:
 
 public:
     void OpenShop(Character& character);
-    void ShowProduct();
+    void ShowProduct(Character& character);
 
 public:
     void Buy(int ProductIndex, Character& character);
