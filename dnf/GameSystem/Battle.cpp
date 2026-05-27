@@ -1,8 +1,14 @@
 ﻿#include <iostream>
 #include "Battle.h"
+
+#include "GameLog.h"
+#include "../GameManager/GameManager.h"
 #include "../Character/Character.h"
 #include "../Monster/Monster.h"
 #include "../Item/Item.h"
+#include "../Interface/Util.h"
+
+GameLog GameManager::GameLog;
 
 Battle::Battle(Character* InChr, Monster* InMst)
     : Chr(InChr), Mst(InMst)
@@ -18,20 +24,29 @@ Battle::~Battle()
 
 void Battle::StartBattle()
 {
+    GameManager::GameLog.ClearBattleLog();
+    
     // 전투 시작
-    std::cout << Mst->GetName() << " 가 나타났다!" << std::endl;
+    std::cout << "\n\n";
+    std::cout << Mst->GetName() << " (이)가 나타났다!";
+    std::cout << "\n\n";
+    
     SetIsOnBattle(true);
     
     // 전투 루프
     while (GetIsOnBattle())
     {
         PlayerTurn();
+        std::cout << "\n\n";
+        
         if (Mst->GetHealth() <= 0)
         {
             PlayerVictory();
             GiveReward();
+            GameManager::GameLog.LogMonsterKill(Mst->GetName());
             
             SetIsOnBattle(false);   // 전투 종료
+            std::cout << "\n\n";
             break;
         }
         
@@ -41,17 +56,20 @@ void Battle::StartBattle()
             MonsterVictory();
             
             SetIsOnBattle(false);   // 전투 종료
+            std::cout << "\n\n";
             break;
         }
+        
+        std::cout << "\n\n";
         
     }
 }
 
 void Battle::PlayerTurn()
 {
-    std::cout << "플레이어 턴!\n" << std::endl;
+    std::cout << "플레이어 턴!" << std::endl;
     std::cout << "1. 공격 2. 방어 3. 아이템 사용 0. 도망" << std::endl;
-    switch (Selector(0, 3))
+    switch (Util::SelectorInt(0, 3))
     {
     case 0:
         MonsterVictory();
@@ -66,7 +84,9 @@ void Battle::PlayerTurn()
         break;
         
     case 3:
+        Chr->GetInventory().PrintInventory();
         
+        Chr->UseRandomItem();
         break;
         
     default:
@@ -82,7 +102,7 @@ void Battle::MonsterTurn()
 
 void Battle::PlayerVictory()
 {
-    std::cout << "★ 플레이어 승리! ★" << std::endl;
+    std::cout << "★★★ 플레이어 승리! ★★★" << std::endl;
 }
 
 void Battle::MonsterVictory()
@@ -105,6 +125,7 @@ int Battle::Selector(int min, int max)
         std::cin >> selection;
         
     }
+    std::cout << "\n\n";
     
     return selection;
 }
