@@ -89,11 +89,8 @@ void GameManager::MainLoop()
 		{
 			GameManager::GL.LogSceneChange("던전");
 			// 전투 시작
-			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
-			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
-
-			//delete CurrentMonster; CurrentMonster = nullptr;
-			//delete CurrentBattle;  CurrentBattle = nullptr;
+			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
+			delete CurrentBattle;  CurrentBattle = nullptr; // 이전 전투 메모리 해제
 
 			CurrentMonster = SpawnMonster(Player->GetLevel());
 			GameManager::GL.LogMonsterSpawn(*CurrentMonster);
@@ -112,8 +109,8 @@ void GameManager::MainLoop()
 			break;
 
 		case 0: // 게임 종료
-			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
-			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
+			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
+			delete CurrentBattle;  CurrentBattle = nullptr; // 이전 전투 메모리 해제
 			return; // MainLoop 함수 종료
 
 		default:
