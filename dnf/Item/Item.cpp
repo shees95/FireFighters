@@ -21,7 +21,6 @@ void Item::Use(Character* character)
     {
     case 0:
         cout << Name << " 사용!" << endl;
-        GameManager::GL.LogItemUse(*this);
         cout << "체력 " << EffectValue << " 회복!" << endl;
         if (character->GetHealth() + EffectValue >= character->GetMaxHealth())
         {
@@ -38,7 +37,6 @@ void Item::Use(Character* character)
 
     case 1:
         cout << Name << " 사용!" << endl;
-        GameManager::GL.LogItemUse(*this);
         cout << "공격력 " << EffectValue << " 증가!" << endl;
         character->SetTempPower(character->GetTempPower() + EffectValue);
         cout << "이번 전투 동안만 효과가 유지됩니다." << endl;
