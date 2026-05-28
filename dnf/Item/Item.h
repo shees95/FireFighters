@@ -34,6 +34,7 @@ public:
     std::string GetName() { return Name; };
     int GetPrice()const { return Price; };
     ItemType GetType()const { return Type; };
+    int GetSellPrice() const { return Price * 6 / 10; };
 
 
 private:
