@@ -28,7 +28,7 @@ void Monster::Attack(Character* character)
 void Monster::TakeDamage(Character* character)
 {
 	cout << Name << "이(가) 공격 받았습니다!" << endl;
-	Health -= character->GetPower();
+	Health -= character->GetTotalPower();
 	cout << "체력 : " << Health + character->GetPower() << " -> " << Health << " (-" << character->GetPower() << ")" << endl;
 }
 

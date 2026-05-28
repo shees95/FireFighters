@@ -47,7 +47,7 @@ void Character::DestroyInstance()
 //Attack 함수 구현
 void Character::Attack(Monster* monster)
 {
-	cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << " (피해량 : " << GetPower() << ")" << endl;
+	cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << " (피해량 : " << GetTotalPower() << ")" << endl;
 	monster->TakeDamage(this);
 }
 
