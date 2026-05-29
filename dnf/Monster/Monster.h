@@ -13,6 +13,7 @@ class Monster : public Actor
 protected:
 	std::string Name;
 	int Health;
+	int MaxHealth;
 	int Power;
 	
 private:
@@ -42,8 +43,8 @@ public:
 	static int GetRandomValue(int Min, int Max);
 
 public:
-	void Attack(Character& Character);
-	void TakeDamage(int Damage);
-
+	void Attack(Character* Character);
+	void TakeDamage(Character* Character);
+	void MonsterStatus();
 
 };

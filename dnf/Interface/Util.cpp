@@ -1,4 +1,4 @@
-// Util.cpp
+﻿// Util.cpp
 
 #include <iostream>
 
@@ -13,6 +13,7 @@ int Util::SelectorInt(int min, int max)
     {
         cout << "선택하세요. (" << min << "~" << max << ") : ";
         cin >> input;
+        cout << "\n";
 
         if (cin.fail())  // 숫자가 아닌 입력 처리
         {
@@ -36,6 +37,7 @@ bool Util::SelectorBool()
     {
         cout << "(y/n) : ";
         cin >> input;
+        cout << "\n";
 
         if (input == "y" || input == "Y") return true;
         if (input == "n" || input == "N") return false;
@@ -44,32 +46,18 @@ bool Util::SelectorBool()
     }
 }
 
-std::string Util::SelectorString(std::string& prompt)
+std::string Util::SelectorString(const std::string& prompt)
 {
     string input;
     while (true)
     {
         cout << prompt;
         cin >> input;
+        cout << "\n";
 
         if (input.empty())
         {
             cout << "입력값이 없습니다.\n";
-            continue;
-        }
-
-        bool onlyDigits = true;
-        for (char c : input)
-        {
-            if (!isdigit(c))
-            {
-                onlyDigits = false;
-                break;
-            }
-        }
-        if (onlyDigits)
-        {
-            cout << "문자를 포함해주세요.\n";
             continue;
         }
 

@@ -17,11 +17,14 @@ public:
 
     void SortItemByPrice();
 
-    void UseRandomItem(Actor* actor);
+    void UseRandomItem(Character* character);
 
     void PrintInventory();
-
+    void PrintSellInventory();
+    
     std::size_t GetInventorySize() const { return items.size(); };
+
+    void PrintUseItems();
 
 private:
     std::vector<Item> items;

@@ -18,7 +18,7 @@ public:
 	void GainExp(int amount);
 	void LevelUp();
 	void Attack(Monster* monster); //공격 함수
-	void TakeDamage(int damage);
+	void TakeDamage(Monster* monster);
 	void PlayerStatus(); //상태 출력 함수
 	bool IsDead() const; //상대 확인 함수
 	void AddItem(Item item);

@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include "../GameManager/GameManager.h"
+
 using namespace std;
 
 #include "Character.h"
@@ -16,56 +18,57 @@ Character* Character::Instance = nullptr;
 
 //생성자
 	Character::Character()
-		: Name(), Level(1), MaxHealth(200), Health(200), Power(30), TmpPower(0), Exp(0), Gold(0)
+	: Name(), Level(1), MaxHealth(200), Health(200), Power(30), TmpPower(0), Exp(0), Gold(0)
 	{}
 
 //소멸자
 	Character::~Character() 
 	{}
 
-	//싱글톤 객체 반환
-	Character* Character::GetInstance()
+//싱글톤 객체 반환
+Character* Character::GetInstance()
+{
+	//인스턴스가 아직 생성되지 않았다면 새로 생성
+	if (Instance == nullptr)
 	{
-		//인스턴스가 아직 생성되지 않았다면 새로 생성
-		if (Instance == nullptr)
-		{
-			Instance = new Character();
-		}
-		//생성된 인스턴스 반환
-		return Instance;
+		Instance = new Character();
 	}
+	//생성된 인스턴스 반환
+	return Instance;
+}
 
-	//싱글톤 객체 소멸
-	void Character::DestroyInstance()
-	{
-		delete Instance;
-		Instance = nullptr;
-	}
+//싱글톤 객체 소멸
+void Character::DestroyInstance()
+{
+	delete Instance;
+	Instance = nullptr;
+}
 
-	//Attack 함수 구현
-	void Character::Attack(Monster* monster)
-	{
-		cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << endl;
-		monster->TakeDamage(GetTotalPower());
-	}
+//Attack 함수 구현
+void Character::Attack(Monster* monster)
+{
+	cout << Name << "이(가) " << monster->GetName() << "을 공격합니다!" << " (피해량 : " << GetTotalPower() << ")" << endl;
+	monster->TakeDamage(this);
+}
+
 
 //Damage를 입는 함수
-void Character::TakeDamage(int damage)
+void Character::TakeDamage(Monster* monster)
 {
-	cout << Name << " 이(가) " << damage << " 데미지를 입었습니다!" << endl;
-
-	SetHealth(max(GetHealth() - damage, 0));
+	cout << Name << " 이(가) 받은 피해량 : " << monster->GetPower() << endl;
 	
-	cout << Name << "체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
+	SetHealth(max(GetHealth() - monster->GetPower(), 0));
+	
+	cout << Name << " 체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
 }
 
 void Character::Heal(int amount)
 {
-	cout << GetName() << " 이(가) " << amount << " 체력을 회복했습니다!" << endl;
-
+	cout << GetName() << " 이(가) " << amount << "만큼 체력을 회복했습니다!" << endl;
+	
 	SetHealth(min(GetHealth() + amount, GetMaxHealth()));
-
-	cout << GetName() << "체력: " << GetHealth() << endl;
+	
+	cout << GetName() << " 체력: " << GetHealth() << " / " << GetMaxHealth() << endl;
 }
 
 void Character::GainExp(int amount)
@@ -88,16 +91,17 @@ void Character::GainExp(int amount)
 
 void Character::LevelUp()
 {
-		Level++; //레벨 증가
-		MaxHealth += (Level * 20); //최대 체력 증가
-		Power += (Level * 5); //공격력 증가
-		Health = MaxHealth; //체력 회복
+	Level++; //레벨 증가
+	MaxHealth += (Level * 20); //최대 체력 증가
+	Power += (Level * 5); //공격력 증가
+	Health = MaxHealth; //체력 회복
 
-		cout << "축하합니다! 레벨업 하였습니다!" << endl;
-		cout << "현재 레벨: " << Level << endl;
-		cout << "최대 체력: " << MaxHealth << endl;
-		cout << "공격력: " << Power << endl;
+	cout << "축하합니다! 레벨업 하였습니다!" << endl;
+	cout << "현재 레벨: " << Level << endl;
+	cout << "최대 체력: " << MaxHealth << endl;
+	cout << "공격력: " << Power << endl;
 
+		
 	if (Level == 10)
 	{
 		cout << "\n최대 레벨(10)에 도달했습니다." << endl;
@@ -115,8 +119,8 @@ bool Character::IsDead() const
 // Gold: 00G
 void Character::PlayerStatus()
 {
-	cout << "Lv." << Level << " " << Name << " (exp " << Exp << "/100)" << endl;
-	cout << "HP: " << Health << " / " << MaxHealth << "   Power: " << Power << endl;
+	cout << "Lv. " << Level << "\t" << Name << " (exp " << Exp << "/100)" << endl;
+	cout << "HP: " << Health << " / " << MaxHealth << "\tPower: " << GetTotalPower() << endl;
 	cout << "Gold: " << Gold << "G" << endl;
 }
 
@@ -137,10 +141,6 @@ void Character::UseRandomItem()
 
 void Character::ResetTmpPower()
 {
-	if (TmpPower > 0)
-	{
 		cout << "일시적으로 증가한 공격력이 초기화됩니다." << endl;
 		TmpPower = 0;
-	}
-	
 }

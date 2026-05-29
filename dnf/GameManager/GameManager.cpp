@@ -4,6 +4,8 @@
 
 #include "GameManager.h"
 
+GameLog GameManager::GL;
+
 using namespace std;
 
 // 생성자 - 포인터 nullptr로 초기화
@@ -60,10 +62,8 @@ void GameManager::StartGame()
 	cout << "[ Text-Console RPG ]" << "\n";
 	cout << "===========================================" << "\n";
 
-	// 이름 입력 받기
-	string name;
-	cout << "캐릭터 이름을 입력하세요. : ";
-	cin >> name;
+	// 유틸리티로 이름 입력
+	string name = Util::SelectorString("캐릭터 이름을 입력하세요. : ");
 	cout << "\n";
 
 	// 캐릭터 생성
@@ -79,44 +79,60 @@ void GameManager::MainLoop()
 	{
 		cout << "=== 베이스캠프 ===" << "\n";
 		cout << "1. 던전 입장" << "\n";
-		cout << "2. 인벤토리 확인" << "\n";
-		cout << "3. 상점 입장" << "\n";
+		cout << "2. 스탯 확인" << "\n";
+		cout << "3. 인벤토리 확인" << "\n";
+		cout << "4. 상점 입장" << "\n";
 		cout << "0. 게임 종료" << "\n";
-		cout << "선택 : ";
-		int choose;
-		cin >> choose;
-		cout << "\n";
 
-		switch (choose)
+		switch (Util::SelectorInt(0, 4))
 		{
 		case 1: // 던전 입장
 		{
-			// GameManagerLog.LogSceneChange("던전");
+			system("cls");
+			GameManager::GL.LogSceneChange("던전");
 			// 전투 시작
-			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
-			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
+			if (CurrentMonster) // 이전 몬스터 메모리 해제
+			{
+				delete CurrentMonster; 
+				CurrentMonster = nullptr;
+			}
+			
+			if (CurrentBattle) // 이전 전투 메모리 해제
+			{
+				delete CurrentBattle;  
+				CurrentBattle = nullptr;
+			}
 
 			CurrentMonster = SpawnMonster(Player->GetLevel());
-			// GameManagerLog.LogMonsterSpawn(*CurrentMonster);
+			GameManager::GL.LogMonsterSpawn(*CurrentMonster);
 			CurrentBattle = new Battle(Player, CurrentMonster);
 			CurrentBattle->StartBattle();
 			break;
 		}
 		case 2: // 인벤토리 확인
-			// GameManagerLog.LogSceneChange("인벤토리");
-			// 인벤토리 아이템 출력 함수 호출
-			// Player->DisplayItems();
-
+			system("cls");
+			Player->PlayerStatus();
+			break;
+			
+		case 3: // 인벤토리 확인
+			system("cls");
+			GameManager::GL.LogSceneChange("인벤토리");
+			Player->DisplayItems();
 			break;
 
-		case 3: // 상점 입장 (도전 과제)
-			// GameManagerLog.LogSceneChange("상점");
-
+		case 4: // 상점 입장 (도전 과제)
+			system("cls");
+			GameManager::GL.LogSceneChange("상점");
+			GameShop.OpenShop(*Player);
 			break;
 
 		case 0: // 게임 종료
-			if (!CurrentMonster) { delete CurrentMonster; } // 이전 몬스터 메모리 해제
-			if (!CurrentBattle) { delete CurrentBattle; }  // 이전 전투 메모리 해제
+			delete CurrentMonster; CurrentMonster = nullptr; // 이전 몬스터 메모리 해제
+			delete CurrentBattle;  CurrentBattle = nullptr; // 이전 전투 메모리 해제
+			
+			GL.PrintVisitedLog();
+			
+			cout << "게임 종료" << "\n";
 			return; // MainLoop 함수 종료
 
 		default:

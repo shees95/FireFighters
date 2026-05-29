@@ -1,1 +1,167 @@
-﻿#include "Shop.h"
+﻿#include <iostream>
+
+using namespace std;
+
+#include "../Item/Inventory.h"
+#include "../Item/Item.h"
+#include "Shop.h"
+#include "../Character/Character.h"
+#include "../Interface/Util.h"
+
+Shop::Shop()
+{
+	Products.push_back(Item("HP 포션", ItemType::Use, 0, 50, 100));
+	Products.push_back(Item("Power 포션", ItemType::Use, 1, 10, 200));
+}
+
+void Shop::OpenShop(Character& character)
+{
+	
+	while (true)
+	{
+		system("cls");
+		
+		// 상점 메뉴 출력
+		cout << endl
+			<< "--------------------------------------" << endl
+			<< "  상점에 어서오세요!\t\t현재 골드 : " << character.GetGold() << "G" << endl
+			<< "--------------------------------------" << endl
+			<< "1. 구매" << endl
+			<< "2. 판매" << endl
+			<< "0. 나가기" << endl;
+		
+		int choice = Util::SelectorInt(0, 2);
+
+		//상점 메뉴 선택
+		switch (choice)
+		{
+		case 1:
+		{
+			system("cls");
+			ShowProduct(character);
+
+			cout << endl;
+			cout << " 구매할 상품의 번호를 입력해주세요." << endl;
+				
+			int ProductIndex = Util::SelectorInt(0, static_cast<int>(Products.size()));
+
+			system("cls");
+			Buy(ProductIndex, character);
+			break;
+		}
+		case 2:
+		{
+			system("cls");
+				
+			Sell(character);
+			break;
+		}
+		case 0:
+		{
+			system("cls");
+				
+			cout << "상점을 나갑니다." << endl << endl;
+			return;
+		}
+		}
+	}
+}
+
+void Shop::ShowProduct(Character& character)
+{
+	
+	//번호를 매기며 모든 상품의 이름과 가격 표시
+	cout << endl 
+		<< "--------------------------------" << endl
+		<< " 판매 상품 리스트\t\t현재 골드 : " << character.GetGold() << "G" << endl
+		<< "--------------------------------" << endl;
+
+	for (size_t i = 0; i < Products.size(); i++)
+	{
+		cout << i + 1 << "." << Products[i].GetName() << " - 가격 : " << Products[i].GetPrice() << "골드" << endl;
+	}
+	cout << "0. 나가기" << endl;
+}
+
+
+void Shop::Buy(int ProductIndex, Character& character)
+{
+	//0. 나가기 구현
+	if (ProductIndex == 0)
+	{
+		return;
+	}
+
+	// 번호 잘못 입력했을 때 처리
+	int Index = ProductIndex - 1;
+	Item item = Products[Index];
+
+	// 골드 부족
+	if (character.GetGold() < item.GetPrice())
+	{
+		cout << "골드가 부족합니다!" << endl;
+		return;
+	}
+
+	// 골드 차감
+	character.SetGold(character.GetGold() - item.GetPrice());
+
+	//아이템 지급
+	character.GetInventory().AddItem(item);
+
+	cout << "남은 골드 : " << character.GetGold() << "G" << endl;
+}
+
+void Shop::Sell(Character& character)
+{
+	Inventory& inventory = character.GetInventory();
+	system("cls");
+	while (true)
+	{
+		cout << endl
+			 << "----------------------------" << endl
+			 << " 판매 메뉴\t\t현재 골드 : " << character.GetGold() << "G" << endl
+			 << "----------------------------" << endl;
+
+		// 인벤토리 출력
+		inventory.PrintSellInventory();
+		cout << "0. 나가기" << endl;
+
+		// 인벤토리가 비어있으면 종료
+		if (inventory.GetInventorySize() == 0)
+		{
+			return;
+		}
+
+		// 판매 아이템 선택
+		cout << endl << "판매할 아이템 번호를 입력해주세요." << endl;
+		int SellIndex = Util::SelectorInt(0, static_cast<int>(inventory.GetInventorySize()));
+
+		//0.나가기 구현
+		if (SellIndex == 0)
+		{
+			system("cls");
+			return;
+		}
+
+		int Index = SellIndex - 1;
+
+		// 아이템 가져오기
+		Item item = inventory.GetItem(Index);
+
+		// 판매 가격
+		int SellPrice = item.GetPrice() * 60 / 100;
+
+		// 골드 지급
+		character.SetGold(character.GetGold() + SellPrice);
+
+		// 인벤토리 제거
+		inventory.RemoveItem(item);
+		system("cls");
+
+		cout << endl
+		     << item.GetName() << " 판매 완료!" << endl;
+
+		cout << SellPrice << " 골드 획득!" << " (현재 골드 : " << character.GetGold() << "G)" << endl;
+	}
+}

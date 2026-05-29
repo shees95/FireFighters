@@ -7,9 +7,10 @@ using namespace std;
 #include "Monster.h"
 #include "../Character/Character.h"
 
-Monster::Monster(string Name, int Health, int Power, Item DropItem)
-	:Name(Name), Health(Health), Power(Power), DropItem(DropItem)
+Monster::Monster(string Name, int MaxHealth, int Power, Item DropItem)
+	:Name(Name), MaxHealth(MaxHealth), Power(Power), DropItem(DropItem)
 {
+	Health = MaxHealth;
 }
 
 //랜덤값 구하는 함수
@@ -18,17 +19,17 @@ int Monster::GetRandomValue(int Min, int Max)
 	return rand() % (Max - Min + 1) + Min;
 }
 
-void Monster::Attack(Character& character)
+void Monster::Attack(Character* character)
 {
-	cout << Name << "이 " << character.GetName() << "을 공격합니다!" << endl;
-	character.TakeDamage(Power);
+	cout << Name << "이 " << character->GetName() << "을 공격합니다!" << endl;
+	character->TakeDamage(this);
 }
 
-void Monster::TakeDamage(int Damage)
+void Monster::TakeDamage(Character* character)
 {
 	cout << Name << "이(가) 공격 받았습니다!" << endl;
-	Health -= Damage;
-	cout << "체력 : " << Health + Damage << " -> " << Health << " (-" << Damage << ")" << endl;
+	Health -= character->GetTotalPower();
+	cout << "체력 : " << Health + character->GetPower() << " -> " << Health << " (-" << character->GetPower() << ")" << endl;
 }
 
 
@@ -72,3 +73,8 @@ Monster Monster::SpawnBossMonster(int CharacterLevel)
 }
 
 
+void Monster::MonsterStatus()
+{
+	cout << Name << endl;
+	cout << "HP: " << Health << " / " << MaxHealth << "\tPower: " << GetPower() << endl;
+}
